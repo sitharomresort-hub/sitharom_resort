@@ -53,7 +53,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
-            <span className="text-[10px] tracking-[0.25em] uppercase text-clay dark:text-gold mb-6 transition-colors duration-500">Welcome to Sitharom, Wayanad</span>
+            <span className="text-lg font-medium tracking-widest uppercase text-clay dark:text-gold mb-6 transition-colors duration-500">Welcome to Sitharom, Wayanad</span>
             <h2 className="text-4xl md:text-5xl font-display leading-tight mb-8">
               A Private Rainforest <br />
               Sanctuary in <em className="text-clay dark:text-gold italic transition-colors duration-500">Wayanad</em>

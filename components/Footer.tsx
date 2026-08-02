@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="flex flex-col gap-6">
             <h4 className="font-display text-lg tracking-widest uppercase text-warm-white">Explore</h4>
-            <nav className="flex flex-col gap-3 text-sm text-text-muted font-light">
+            <nav className="flex flex-col gap-3 text-base text-text-muted font-light">
               <Link href="/villas" className="hover:text-gold transition-colors inline-block">Our Villas</Link>
               <Link href="/gallery" className="hover:text-gold transition-colors inline-block">Gallery</Link>
               <Link href="/#experience" className="hover:text-gold transition-colors inline-block">Experiences</Link>
@@ -40,7 +40,7 @@ export default function Footer() {
           {/* Villas List */}
           <div className="flex flex-col gap-6">
             <h4 className="font-display text-lg tracking-widest uppercase text-warm-white">Accommodations</h4>
-            <nav className="flex flex-col gap-3 text-sm text-text-muted font-light">
+            <nav className="flex flex-col gap-3 text-base text-text-muted font-light">
               <Link href="/villas#garden" className="hover:text-gold transition-colors inline-block">Garden Pool Villa</Link>
               <Link href="/villas#panorama" className="hover:text-gold transition-colors inline-block">Panorama Pool Suite</Link>
               <Link href="/villas#royal" className="hover:text-gold transition-colors inline-block">Royal Infinity Villa</Link>
@@ -50,10 +50,10 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="flex flex-col gap-6">
             <h4 className="font-display text-lg tracking-widest uppercase text-warm-white">Connect</h4>
-            <div className="flex flex-col gap-3 text-sm text-text-muted font-light">
+            <div className="flex flex-col gap-3 text-base text-text-muted font-light">
               <p><a href="https://share.google/10tYNsVAAc5jS2pAT" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Charity, Old Vythiri, Kunnathidavaka,<br/>Vythiri, Kerala 673576</a></p>
               <a href="tel:+917306197613" className="hover:text-gold transition-colors">+91 73061 97613</a>
-              <a href="mailto:info@sitharom.com" className="hover:text-gold transition-colors">info@sitharom.com</a>
+              <a href="mailto:sitharomresort@gmail.com" className="hover:text-gold transition-colors">sitharomresort@gmail.com</a>
               <a href="https://wa.me/917306197613" className="text-clay-light hover:text-clay transition-colors mt-2 uppercase tracking-wider font-medium text-xs">
                 Chat on WhatsApp
               </a>

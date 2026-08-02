@@ -22,8 +22,8 @@ export default function Hero() {
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.8, ease: "easeOut" }
     },
@@ -48,20 +48,20 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <motion.div 
+      <motion.div
         className="relative z-10 container mx-auto px-6 text-center flex flex-col items-center mt-20"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.p 
+        <motion.p
           variants={itemVariants}
           className="text-gold uppercase tracking-[0.25em] text-xs font-medium mb-6 drop-shadow-md"
         >
           2 Private Villas &middot; 2 Bedrooms Each
         </motion.p>
-        
-        <motion.h1 
+
+        <motion.h1
           className="font-display text-5xl md:text-7xl lg:text-8xl text-warm-white leading-tight mb-4 drop-shadow-lg flex flex-wrap justify-center gap-x-3 md:gap-x-4"
         >
           <motion.span variants={itemVariants}>Sitharom</motion.span>
@@ -70,19 +70,19 @@ export default function Hero() {
           <motion.em variants={itemVariants} className="text-gold font-light italic">Villa</motion.em>
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           variants={itemVariants}
           className="text-warm-white/90 uppercase tracking-widest text-sm md:text-base font-light mb-12 max-w-lg text-balance drop-shadow-md"
         >
           Where Luxury Meets Serenity
         </motion.p>
 
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-6 items-center"
         >
           <MagneticButton stiffness={150} damping={15}>
-            <button 
+            <button
               onClick={() => openBooking()}
               className="relative overflow-hidden bg-clay text-warm-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-clay-light hover:shadow-[0_4px_20px_rgba(181,69,27,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-300 border border-clay hover:border-clay-light group flex items-center justify-center"
             >
@@ -91,8 +91,8 @@ export default function Hero() {
             </button>
           </MagneticButton>
           <MagneticButton stiffness={150} damping={15}>
-            <Link 
-              href="/villas" 
+            <Link
+              href="/villas"
               className="relative overflow-hidden bg-transparent text-warm-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-warm-white hover:text-villa-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-300 border border-warm-white/50 hover:shadow-[0_4px_15px_rgba(255,253,249,0.15)] flex items-center justify-center"
             >
               Explore Villas
@@ -102,7 +102,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10 cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -113,10 +113,10 @@ export default function Hero() {
       >
         <span className="text-warm-white/70 uppercase tracking-widest text-[10px]">Scroll</span>
         <div className="w-[1px] h-12 bg-warm-white/20 relative overflow-hidden">
-          <motion.div 
+          <motion.div
             className="w-full h-1/2 bg-gold absolute top-0"
-            animate={{ 
-              top: ['-50%', '100%'] 
+            animate={{
+              top: ['-50%', '100%']
             }}
             transition={{
               duration: 2,

@@ -36,8 +36,8 @@ export default function Villas() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-[10px] tracking-[0.25em] uppercase text-clay dark:text-gold mb-4 block transition-colors duration-500">Our Accommodations</span>
-          <h2 className="text-4xl md:text-5xl font-display text-villa-dark dark:text-sand transition-colors duration-500">
+          <span className="text-lg font-semibold tracking-widest uppercase text-clay dark:text-gold mb-4 block transition-colors duration-500">Our Accommodations</span>
+          <h2 className="text-2xl md:text-3xl font-display text-villa-dark dark:text-sand transition-colors duration-500">
             Your Private <em className="text-clay dark:text-gold italic transition-colors duration-500">Sanctuary</em>
           </h2>
         </motion.div>

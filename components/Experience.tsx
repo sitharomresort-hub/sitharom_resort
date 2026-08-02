@@ -46,6 +46,27 @@ const experiences = [
     desc: "Re-energize with friendly matches of Badminton on our manicured green lawns, enveloped by towering forest trees.",
     image: "/images/experiences/outdoor.png",
     glow: "rgba(184, 138, 68, 0.22)" // Sunset Bronze Glow
+  },
+  {
+    num: "07",
+    title: "Couple Package",
+    desc: "A romantic getaway curated exclusively for couples. Includes intimate dining and special arrangements.",
+    image: "/images/experiences/couple.png",
+    glow: "rgba(184, 138, 68, 0.2)"
+  },
+  {
+    num: "08",
+    title: "Family",
+    desc: "Create lasting memories with your loved ones. Activities and spaces designed for all age groups.",
+    image: "/images/experiences/family.png",
+    glow: "rgba(184, 138, 68, 0.22)"
+  },
+  {
+    num: "09",
+    title: "Strangers camp",
+    desc: "Connect with nature and new friends. A unique camping experience in the heart of the Wayanad forest.",
+    image: "/images/experiences/camp.png",
+    glow: "rgba(184, 138, 68, 0.18)"
   }
 ];
 

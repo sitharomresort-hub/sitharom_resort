@@ -59,7 +59,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-[10px] tracking-[0.25em] uppercase text-clay dark:text-gold mb-4 block transition-colors duration-500">Guest Memoirs</span>
+          <span className="text-lg font-semibold tracking-widest uppercase text-clay dark:text-gold mb-4 block transition-colors duration-500">Guest Memories</span>
           <h2 className="text-4xl md:text-5xl font-display text-villa-dark dark:text-sand transition-colors duration-500">
             Words of <em className="text-clay dark:text-gold italic transition-colors duration-500">Elegance</em>
           </h2>

@@ -165,7 +165,7 @@ export class HotelogixAdapter implements BookingProviderAdapter {
         maxOccupancy: 2,
         images: ['https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80'],
         description: 'Exquisite cottage featuring custom heated outdoor forest jacuzzi, perfect for honeymooners.',
-        amenities: ['Outdoor Jacuzzi Tub', 'Glass Roof Shower room', 'Espresso Machine', 'Breakfast Included']
+        amenities: ['Espresso Machine', 'Breakfast Included']
       }
     ];
   }

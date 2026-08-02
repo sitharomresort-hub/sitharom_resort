@@ -93,7 +93,7 @@ export default function BookingWizard() {
         );
         if (matchingRoom) {
           setSelectedRoom(matchingRoom);
-          setStep(3); // Skip straight to add-ons if room is pre-selected and available!
+          setStep(3); // Skip straight to Guest Details if room is pre-selected and available!
           setLoading(false);
           return;
         }
@@ -145,7 +145,7 @@ export default function BookingWizard() {
 
       const result = await response.json();
       setReservationResult(result);
-      setStep(5); // Go to success page
+      setStep(4); // Go to success page
     } catch (err: any) {
       setError(err.message || 'Failed to confirm reservation.');
     } finally {
@@ -155,7 +155,7 @@ export default function BookingWizard() {
 
   const handleSelectRoom = (room: RoomAvailability) => {
     setSelectedRoom(room);
-    setStep(3); // Go to Add-ons selection
+    setStep(3); // Go to Guest Details
   };
 
   const toggleAddon = (addonId: string) => {
@@ -233,12 +233,12 @@ export default function BookingWizard() {
       <div className="mb-8 text-center relative z-10">
         <span className="text-[9px] tracking-[0.3em] uppercase text-gold/80 block mb-1 font-light">Sitharom Pool Villa</span>
         <h2 className="text-2xl md:text-3xl font-display font-light mb-6 tracking-wide">
-          {step === 5 ? 'Reservation Secured' : 'Secure Reservation Engine'}
+          {step === 4 ? 'Reservation Secured' : 'Secure Reservation Engine'}
         </h2>
         
-        {step < 5 && (
+        {step < 4 && (
           <div className="flex justify-center items-center gap-1.5 max-w-sm mx-auto">
-            {[1, 2, 3, 4].map((s) => (
+            {[1, 2, 3].map((s) => (
               <div key={s} className="flex items-center">
                 <div 
                   className={`w-6 h-6 rounded-full border flex items-center justify-center text-[9px] font-medium transition-all duration-500 ${
@@ -247,7 +247,7 @@ export default function BookingWizard() {
                 >
                   {step > s ? <Check size={11} className="text-gold" /> : s}
                 </div>
-                {s < 4 && (
+                {s < 3 && (
                   <div className={`h-[1px] w-8 md:w-12 transition-colors duration-500 ${
                     step > s ? 'bg-gold/60' : 'bg-warm-white/10'
                   }`} />
@@ -510,98 +510,8 @@ export default function BookingWizard() {
             </motion.div>
           )}
 
-          {/* STEP 3: CUSTOMIZE / ADDONS */}
+          {/* STEP 3: GUEST DETAILS & PRICE REVIEW */}
           {step === 3 && selectedRoom && (
-            <motion.div 
-              key="step3"
-              initial={{ opacity: 0, x: 15 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -15 }}
-              className="flex flex-col gap-6 max-w-3xl mx-auto"
-            >
-              <div className="flex justify-between items-center border-b border-warm-white/10 pb-4">
-                <button 
-                  onClick={() => {
-                    // If room was preselected from context, step back to Step 1 directly
-                    if (selectedRoomType) {
-                      setStep(1);
-                    } else {
-                      setStep(2);
-                    }
-                  }} 
-                  className="flex items-center gap-2 text-xs text-gold hover:text-white transition-colors"
-                >
-                  <ArrowLeft size={14} /> Back
-                </button>
-                <div className="text-right">
-                  <span className="text-[9px] uppercase tracking-wider text-warm-white/50 block">Selected Suite</span>
-                  <span className="text-xs font-medium text-gold">{selectedRoom.roomName}</span>
-                </div>
-              </div>
-
-              <div className="text-center max-w-md mx-auto mb-2">
-                <h3 className="font-display text-xl text-gold mb-1">Enhance Your Sanctuary</h3>
-                <p className="text-xs text-warm-white/60 font-light">Custom elements to elevate your private retreat in the forest canopy.</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Wellness package */}
-                <div 
-                  onClick={() => toggleAddon('pkg-wellness')}
-                  className={`border p-5 rounded-xl flex items-start gap-4 cursor-pointer transition-all duration-300 ${
-                    selectedAddons.includes('pkg-wellness') 
-                      ? 'border-gold bg-gold/5 shadow-[0_0_15px_rgba(201,169,110,0.05)]' 
-                      : 'border-warm-white/10 bg-warm-white/[0.01] hover:border-warm-white/20'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                    selectedAddons.includes('pkg-wellness') ? 'bg-gold text-villa-dark' : 'bg-gold/10 text-gold'
-                  }`}>
-                    <Sparkles size={14} />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-display text-base text-warm-white mb-0.5">Forest Spa & Wellness</h4>
-                    <p className="text-[11px] text-warm-white/60 font-light mb-2 leading-relaxed">60-minute premium in-villa Ayurvedic massage session per guest.</p>
-                    <span className="text-xs text-gold font-medium">+ ₹5,000 / stay</span>
-                  </div>
-                </div>
-
-                {/* Honeymoon Package */}
-                <div 
-                  onClick={() => toggleAddon('pkg-honeymoon')}
-                  className={`border p-5 rounded-xl flex items-start gap-4 cursor-pointer transition-all duration-300 ${
-                    selectedAddons.includes('pkg-honeymoon') 
-                      ? 'border-gold bg-gold/5 shadow-[0_0_15px_rgba(201,169,110,0.05)]' 
-                      : 'border-warm-white/10 bg-warm-white/[0.01] hover:border-warm-white/20'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                    selectedAddons.includes('pkg-honeymoon') ? 'bg-gold text-villa-dark' : 'bg-gold/10 text-gold'
-                  }`}>
-                    <Gift size={14} />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-display text-base text-warm-white mb-0.5">Romantic setup</h4>
-                    <p className="text-[11px] text-warm-white/60 font-light mb-2 leading-relaxed">Floral bed setting, custom welcome cake, and vintage non-alcoholic cider.</p>
-                    <span className="text-xs text-gold font-medium">+ ₹3,500 / stay</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-end pt-4 border-t border-warm-white/10">
-                <button 
-                  onClick={() => setStep(4)}
-                  className="bg-gold hover:bg-[#D4B780] text-villa-dark text-xs font-semibold tracking-widest uppercase px-8 py-3.5 hover:shadow-lg transition-all flex items-center gap-1.5 rounded-full"
-                >
-                  Guest Details
-                  <ChevronRight size={14} />
-                </button>
-              </div>
-            </motion.div>
-          )}
-
-          {/* STEP 4: GUEST DETAILS & PRICE REVIEW */}
-          {step === 4 && selectedRoom && (
             <motion.form 
               key="step4"
               initial={{ opacity: 0, x: 15 }}
@@ -616,63 +526,63 @@ export default function BookingWizard() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[9px] tracking-wider uppercase text-warm-white/70">First Name</label>
+                    <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">First Name</label>
                     <input 
                       type="text"
                       placeholder="John"
                       {...register('firstName', { required: true })}
                       style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-xs rounded transition-colors placeholder:text-warm-white/20"
+                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[9px] tracking-wider uppercase text-warm-white/70">Last Name</label>
+                    <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Last Name</label>
                     <input 
                       type="text"
                       placeholder="Doe"
                       {...register('lastName', { required: true })}
                       style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-xs rounded transition-colors placeholder:text-warm-white/20"
+                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[9px] tracking-wider uppercase text-warm-white/70">Email Address</label>
+                    <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Email Address</label>
                     <input 
                       type="email"
                       placeholder="john.doe@gmail.com"
                       {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
                       style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-xs rounded transition-colors placeholder:text-warm-white/20"
+                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[9px] tracking-wider uppercase text-warm-white/70">Phone / WhatsApp</label>
+                    <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Phone / WhatsApp</label>
                     <input 
                       type="tel"
                       placeholder="+91 98765 43210"
                       {...register('phone', { required: true })}
                       style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-xs rounded transition-colors placeholder:text-warm-white/20"
+                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20"
                     />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[9px] tracking-wider uppercase text-warm-white/70">Special Requests (Optional)</label>
+                  <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Special Requests (Optional)</label>
                   <textarea 
                     rows={3}
                     placeholder="Dietary preferences, plantation tour requests, etc."
                     {...register('specialRequests')}
                     style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                    className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-xs rounded transition-colors placeholder:text-warm-white/20 resize-none"
+                    className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20 resize-none"
                   />
                 </div>
 
                 <div className="flex justify-between items-center pt-2">
-                  <button type="button" onClick={() => setStep(3)} className="flex items-center gap-1.5 text-xs text-gold hover:text-white transition-colors">
+                  <button type="button" onClick={() => setStep(2)} className="flex items-center gap-1.5 text-xs text-gold hover:text-white transition-colors">
                     <ArrowLeft size={13} /> Back
                   </button>
                 </div>
@@ -683,7 +593,7 @@ export default function BookingWizard() {
                 <div>
                   <h4 className="font-display text-base text-gold border-b border-warm-white/10 pb-2 mb-3 tracking-wide">Stay Summary</h4>
                   
-                  <div className="flex flex-col gap-2.5 text-[11px] leading-relaxed">
+                  <div className="flex flex-col gap-3 text-sm leading-relaxed">
                     <div className="flex justify-between">
                       <span className="opacity-60">Villa Type:</span>
                       <span className="font-medium text-warm-white">{selectedRoom.roomName}</span>
@@ -743,9 +653,9 @@ export default function BookingWizard() {
                 </div>
 
                 <div className="border-t border-warm-white/10 pt-4 flex flex-col gap-3">
-                  <div className="flex justify-between items-baseline mb-1">
-                    <span className="text-[10px] uppercase tracking-wider text-gold font-medium">Grand Total</span>
-                    <span className="text-xl font-display font-semibold text-gold">₹{getTotalPrice().toLocaleString()}</span>
+                  <div className="flex justify-between items-baseline mb-2">
+                    <span className="text-xs uppercase tracking-wider text-gold font-medium">Grand Total</span>
+                    <span className="text-2xl font-display font-semibold text-gold">₹{getTotalPrice().toLocaleString()}</span>
                   </div>
 
                   <button 
@@ -772,8 +682,8 @@ export default function BookingWizard() {
             </motion.form>
           )}
 
-          {/* STEP 5: SUCCESSFlow */}
-          {step === 5 && reservationResult && (
+          {/* STEP 4: SUCCESSFlow */}
+          {step === 4 && reservationResult && (
             <motion.div 
               key="step5"
               initial={{ opacity: 0, scale: 0.96 }}

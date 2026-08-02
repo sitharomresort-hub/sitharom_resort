@@ -37,8 +37,8 @@ export default function Amenities() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-[10px] tracking-[0.25em] uppercase text-gold mb-4 block">Signature Amenities</span>
-          <h2 className="text-4xl md:text-5xl font-display text-villa-dark dark:text-warm-white transition-colors duration-500">
+          <span className="text-lg font-semibold tracking-widest uppercase text-gold mb-4 block">Signature Amenities</span>
+          <h2 className="text-2xl md:text-3xl font-display text-villa-dark dark:text-warm-white transition-colors duration-500">
             Uncompromising <em className="text-gold italic">Luxury</em>
           </h2>
           <div className="w-16 h-[1px] bg-gold/20 mx-auto mt-6" />

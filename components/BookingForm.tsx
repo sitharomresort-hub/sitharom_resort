@@ -133,7 +133,7 @@ export default function BookingForm() {
             
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 flex flex-col gap-1">
-                <label className="text-[10px] tracking-widest uppercase opacity-85 px-1">Name</label>
+                <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1">Name</label>
                 <input 
                   type="text"
                   placeholder="Your full name"
@@ -142,7 +142,7 @@ export default function BookingForm() {
                 />
               </div>
               <div className="flex-1 flex flex-col gap-1">
-                <label className="text-[10px] tracking-widest uppercase opacity-85 px-1">Phone / WhatsApp</label>
+                <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1">Phone / WhatsApp</label>
                 <input 
                   type="tel"
                   placeholder="Your contact number"
@@ -154,7 +154,7 @@ export default function BookingForm() {
 
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 flex flex-col gap-1">
-                <label className="text-[10px] tracking-widest uppercase opacity-85 px-1">Check-in</label>
+                <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1">Check-in</label>
                 <input 
                   type="date"
                   {...register('checkIn', { required: true })}
@@ -162,7 +162,7 @@ export default function BookingForm() {
                 />
               </div>
               <div className="flex-1 flex flex-col gap-1">
-                <label className="text-[10px] tracking-widest uppercase opacity-85 px-1">Check-out</label>
+                <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1">Check-out</label>
                 <input 
                   type="date"
                   {...register('checkOut', { required: true })}
@@ -173,26 +173,20 @@ export default function BookingForm() {
 
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 flex flex-col gap-1">
-                <label className="text-[10px] tracking-widest uppercase opacity-85 px-1">Guests</label>
+                <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1">Guests</label>
                 <div className="relative">
-                  <select 
+                  <input 
+                    type="number"
+                    min="1"
+                    max="17"
+                    defaultValue="2"
                     {...register('guests')}
-                    className="w-full bg-warm-white/5 dark:bg-black/20 border border-warm-white/10 dark:border-gold/15 hover:border-gold/40 focus:border-gold text-warm-white dark:text-sand px-4 py-3 rounded-xl focus:outline-none transition-all duration-300 appearance-none text-sm pr-10"
-                  >
-                    <option value="1" className="text-villa-dark bg-cream dark:bg-[#1C1610] dark:text-sand">1 Guest</option>
-                    <option value="2" className="text-villa-dark bg-cream dark:bg-[#1C1610] dark:text-sand">2 Guests</option>
-                    <option value="3" className="text-villa-dark bg-cream dark:bg-[#1C1610] dark:text-sand">3 Guests</option>
-                    <option value="4" className="text-villa-dark bg-cream dark:bg-[#1C1610] dark:text-sand">4+ Guests</option>
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-warm-white/50 dark:text-sand/50">
-                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                    </svg>
-                  </div>
+                    className="w-full bg-warm-white/5 dark:bg-black/20 border border-warm-white/10 dark:border-gold/15 hover:border-gold/40 focus:border-gold text-warm-white dark:text-sand px-4 py-3 rounded-xl focus:outline-none transition-all duration-300 text-sm"
+                  />
                 </div>
               </div>
               <div className="flex-1 flex flex-col gap-1">
-                <label className="text-[10px] tracking-widest uppercase opacity-85 px-1">Room Type</label>
+                <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1">Room Type</label>
                 <div className="relative">
                   <select 
                     {...register('villaType')}
@@ -200,6 +194,7 @@ export default function BookingForm() {
                   >
                     <option value="Ithal Villa" className="text-villa-dark bg-cream dark:bg-[#1C1610] dark:text-sand">Ithal Villa</option>
                     <option value="Harsham Villa" className="text-villa-dark bg-cream dark:bg-[#1C1610] dark:text-sand">Harsham Villa</option>
+                    <option value="Reserve 2 Villas" className="text-villa-dark bg-cream dark:bg-[#1C1610] dark:text-sand">Reserve 2 Villas</option>
                     <option value="Any Available" className="text-villa-dark bg-cream dark:bg-[#1C1610] dark:text-sand">Any Available</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-warm-white/50 dark:text-sand/50">

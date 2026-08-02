@@ -133,12 +133,8 @@ export default function ExperiencePackages() {
                     ))}
                   </ul>
 
-                  {/* Pricing & CTA */}
-                  <div className="flex justify-between items-center border-t border-warm-white/10 pt-5 mt-2">
-                    <div>
-                      <span className="block text-[8px] uppercase tracking-widest text-warm-white/60 font-medium">Starting From</span>
-                      <span className="font-display text-xl text-gold font-semibold">{pkg.price}</span>
-                    </div>
+                  {/* CTA */}
+                  <div className="flex justify-end items-center border-t border-warm-white/10 pt-5 mt-2">
                     <a
                       href={waUrl}
                       target="_blank"

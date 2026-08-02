@@ -112,7 +112,7 @@ const attractions = [
     ),
   },
   {
-    name: 'Kalpetta Town',
+    name: "Nearby Town Vythiri - 5 min's",
     type: 'Local Market',
     km: '18 km',
     drive: '35 min',
@@ -213,24 +213,6 @@ function AttractionCard({
           {icon}
         </div>
 
-        {/* Distance pill */}
-        <div
-          style={{
-            padding: '5px 13px',
-            borderRadius: 999,
-            background: 'rgba(10,6,3,0.60)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(193,124,69,0.35)',
-            color: '#c9a96e',
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: '0.12em',
-            fontFamily: 'var(--font-jost), sans-serif',
-          }}
-        >
-          {km}
-        </div>
       </div>
 
       {/* ── Bottom content panel ─────────────────────────────────── */}
@@ -287,39 +269,6 @@ function AttractionCard({
             }}
           />
 
-          {/* Drive time row */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-              {/* clock icon */}
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c17c45" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-              <span
-                style={{
-                  fontSize: 11.5,
-                  color: 'rgba(250,247,242,0.7)',
-                  letterSpacing: '0.06em',
-                  fontFamily: 'var(--font-jost), sans-serif',
-                  fontWeight: 400,
-                  transition: 'color 0.5s ease',
-                }}
-              >
-                {drive} from resort
-              </span>
-            </div>
-
-            {/* Arrow — slides in on hover */}
-            <motion.span
-              style={{ color: '#c17c45', fontSize: 16, lineHeight: 1 }}
-              initial={{ opacity: 0, x: -6 }}
-              whileHover={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.25 }}
-              className="group-hover:opacity-100 opacity-0 transition-all duration-300 translate-x-0 group-hover:translate-x-0 -translate-x-2"
-            >
-              →
-            </motion.span>
-          </div>
         </div>
       </div>
     </motion.article>
@@ -403,8 +352,8 @@ export default function NearbyAttractions() {
             <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:22 }}>
               <div style={{ width:32, height:1, background:'rgba(193,124,69,0.6)' }}/>
               <p style={{
-                fontSize:10.5, letterSpacing:'0.28em', textTransform:'uppercase',
-                color:'#c17c45', fontFamily:'var(--font-jost), sans-serif', fontWeight:500,
+                fontSize:14, letterSpacing:'0.28em', textTransform:'uppercase',
+                color:'#c17c45', fontFamily:'var(--font-jost), sans-serif', fontWeight:600,
               }}>
                 Local Sightseeing
               </p>
