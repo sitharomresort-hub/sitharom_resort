@@ -21,8 +21,7 @@ export default function ContactPage() {
         <div className="flex flex-col items-center p-8 bg-cream dark:bg-[#1C1610] border border-sand dark:border-gold/10 transition-colors duration-500">
           <span className="font-display text-2xl mb-4 text-clay dark:text-gold transition-colors duration-500">Address</span>
           <p className="font-light text-text-muted dark:text-sand/70 text-sm leading-relaxed transition-colors duration-500">
-            Charity, Old Vythiri, Kunnathidavaka,<br />
-            Vythiri, Wayanad, Kerala 673576
+            <a href="https://share.google/10tYNsVAAc5jS2pAT" target="_blank" rel="noopener noreferrer" className="hover:text-clay dark:hover:text-gold transition-colors">Charity, Old Vythiri, Kunnathidavaka,<br />Vythiri, Kerala 673576</a>
           </p>
         </div>
         <div className="flex flex-col items-center p-8 bg-cream dark:bg-[#1C1610] border border-sand dark:border-gold/10 transition-colors duration-500">

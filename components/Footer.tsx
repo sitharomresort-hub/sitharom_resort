@@ -51,10 +51,10 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <h4 className="font-display text-lg tracking-widest uppercase text-warm-white">Connect</h4>
             <div className="flex flex-col gap-3 text-sm text-text-muted font-light">
-              <p>123 Tropical Way, Bali 80361, Indonesia</p>
-              <a href="tel:+1234567890" className="hover:text-gold transition-colors">+1 (234) 567-890</a>
+              <p><a href="https://share.google/10tYNsVAAc5jS2pAT" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Charity, Old Vythiri, Kunnathidavaka,<br/>Vythiri, Kerala 673576</a></p>
+              <a href="tel:+917306197613" className="hover:text-gold transition-colors">+91 73061 97613</a>
               <a href="mailto:info@sitharom.com" className="hover:text-gold transition-colors">info@sitharom.com</a>
-              <a href="https://wa.me/919000000000" className="text-clay-light hover:text-clay transition-colors mt-2 uppercase tracking-wider font-medium text-xs">
+              <a href="https://wa.me/917306197613" className="text-clay-light hover:text-clay transition-colors mt-2 uppercase tracking-wider font-medium text-xs">
                 Chat on WhatsApp
               </a>
             </div>

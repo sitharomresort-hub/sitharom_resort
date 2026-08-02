@@ -33,7 +33,7 @@ export default function BookingForm() {
       }
     };
 
-    const phoneNumber = "919000000000"; // Placeholder: User should replace with actual number
+    const phoneNumber = "917306197613"; // Real phone number
     const message = `✨ *SITHAROM POOL VILLA - RESERVATION INQUIRY* ✨\n\n` +
       `👤 *Name:* ${data.name}\n` +
       `📞 *Phone / WhatsApp:* ${data.phone}\n` +
