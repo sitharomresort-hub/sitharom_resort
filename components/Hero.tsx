@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import heroBg from '@/app/gallery/bg1.jpeg';
 import { useBooking } from '@/lib/BookingContext';
+import MagneticButton from '@/components/MagneticButton';
 
 export default function Hero() {
   const { openBooking } = useBooking();
@@ -61,11 +62,12 @@ export default function Hero() {
         </motion.p>
         
         <motion.h1 
-          variants={itemVariants}
-          className="font-display text-5xl md:text-7xl lg:text-8xl text-warm-white leading-tight mb-4 drop-shadow-lg"
+          className="font-display text-5xl md:text-7xl lg:text-8xl text-warm-white leading-tight mb-4 drop-shadow-lg flex flex-wrap justify-center gap-x-3 md:gap-x-4"
         >
-          Sitharom <br className="md:hidden" />
-          <em className="text-gold font-light italic">Pool Villa</em>
+          <motion.span variants={itemVariants}>Sitharom</motion.span>
+          <br className="md:hidden w-full" />
+          <motion.em variants={itemVariants} className="text-gold font-light italic">Pool</motion.em>
+          <motion.em variants={itemVariants} className="text-gold font-light italic">Villa</motion.em>
         </motion.h1>
 
         <motion.p 
@@ -77,21 +79,25 @@ export default function Hero() {
 
         <motion.div 
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-6"
+          className="flex flex-col sm:flex-row gap-6 items-center"
         >
-          <button 
-            onClick={() => openBooking()}
-            className="relative overflow-hidden bg-clay text-warm-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-clay-light hover:shadow-[0_4px_20px_rgba(181,69,27,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-300 border border-clay hover:border-clay-light group flex items-center justify-center"
-          >
-            <span className="relative z-10">Reserve Your Villa</span>
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer-sweep pointer-events-none" />
-          </button>
-          <Link 
-            href="/villas" 
-            className="relative overflow-hidden bg-transparent text-warm-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-warm-white hover:text-villa-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-300 border border-warm-white/50 hover:shadow-[0_4px_15px_rgba(255,253,249,0.15)] flex items-center justify-center"
-          >
-            Explore Villas
-          </Link>
+          <MagneticButton stiffness={150} damping={15}>
+            <button 
+              onClick={() => openBooking()}
+              className="relative overflow-hidden bg-clay text-warm-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-clay-light hover:shadow-[0_4px_20px_rgba(181,69,27,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-300 border border-clay hover:border-clay-light group flex items-center justify-center"
+            >
+              <span className="relative z-10">Reserve Your Villa</span>
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer-sweep pointer-events-none" />
+            </button>
+          </MagneticButton>
+          <MagneticButton stiffness={150} damping={15}>
+            <Link 
+              href="/villas" 
+              className="relative overflow-hidden bg-transparent text-warm-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-warm-white hover:text-villa-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-300 border border-warm-white/50 hover:shadow-[0_4px_15px_rgba(255,253,249,0.15)] flex items-center justify-center"
+            >
+              Explore Villas
+            </Link>
+          </MagneticButton>
         </motion.div>
       </motion.div>
 

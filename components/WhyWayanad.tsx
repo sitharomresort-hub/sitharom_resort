@@ -65,7 +65,7 @@ export default function WhyWayanad() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
 
   return (
-    <section ref={containerRef} className="py-28 md:py-36 bg-sand dark:bg-[#161917] text-villa-dark dark:text-[#FAF7F2] border-t border-gold/10 relative overflow-hidden transition-colors duration-500">
+    <section ref={containerRef} className="py-28 md:py-36 bg-villa-dark dark:bg-[#161917] text-warm-white border-t border-gold/10 relative overflow-hidden transition-colors duration-500">
       {/* Cinematic Parallax Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div 
@@ -73,7 +73,7 @@ export default function WhyWayanad() {
           style={{ y: backgroundY }}
         >
           <Image
-            src="/images/wayanad-landscape.png"
+            src="/images/wayanad image1.avif"
             alt="Cinematic Wayanad landscape featuring mist-covered Western Ghats mountains"
             fill
             className="object-cover object-center pointer-events-none select-none brightness-[0.85] dark:brightness-[0.4] contrast-[0.9] dark:contrast-[0.95] saturate-[1.1] dark:saturate-[0.75] transition-all duration-500"
@@ -81,9 +81,8 @@ export default function WhyWayanad() {
             priority
           />
         </motion.div>
-        {/* Luxury Overlay — lighter so background scene shows through */}
-        <div className="absolute inset-0 bg-sand/40 dark:bg-[#161917]/75 mix-blend-multiply dark:mix-blend-multiply z-[1] transition-colors duration-500" />
-        <div className="absolute inset-0 bg-gradient-to-b from-sand/60 via-transparent to-sand/70 dark:from-[#161917]/80 dark:via-[#161917]/20 dark:to-[#161917]/80 z-[2] transition-colors duration-500" />
+        {/* Dark Overlay to give a lightly dark feel */}
+        <div className="absolute inset-0 bg-villa-dark/40 dark:bg-black/50 transition-colors duration-500" />
       </div>
 
       {/* Background Cinematic Rainforest Mist */}
@@ -160,7 +159,7 @@ export default function WhyWayanad() {
             Romantic Escape
           </motion.span>
           <motion.h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-display leading-tight mb-4 font-light text-villa-dark dark:text-warm-white relative z-10 transition-colors duration-500"
+            className="text-4xl md:text-5xl lg:text-6xl font-display leading-tight mb-4 font-light text-warm-white relative z-10 transition-colors duration-500"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

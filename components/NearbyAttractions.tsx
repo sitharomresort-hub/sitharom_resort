@@ -239,11 +239,11 @@ function AttractionCard({
           style={{
             borderRadius: 14,
             padding: '16px 18px 18px',
-            background: 'var(--color-panel-bg)',
+            background: 'rgba(10,6,3,0.60)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid var(--color-panel-border)',
-            borderTop: '1px solid var(--color-panel-border-top)',
+            border: '1px solid rgba(193,124,69,0.35)',
+            borderTop: '1px solid rgba(193,124,69,0.45)',
             transition: 'background-color 0.5s ease, border-color 0.5s ease',
           }}
         >
@@ -269,7 +269,7 @@ function AttractionCard({
               fontSize: 22,
               fontWeight: 400,
               lineHeight: 1.25,
-              color: 'var(--color-card-title)',
+              color: '#FAF7F2',
               letterSpacing: '0.015em',
               marginBottom: 12,
               transition: 'color 0.5s ease',
@@ -298,7 +298,7 @@ function AttractionCard({
               <span
                 style={{
                   fontSize: 11.5,
-                  color: 'var(--color-card-drive)',
+                  color: 'rgba(250,247,242,0.7)',
                   letterSpacing: '0.06em',
                   fontFamily: 'var(--font-jost), sans-serif',
                   fontWeight: 400,
@@ -340,13 +340,12 @@ export default function NearbyAttractions() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden transition-colors duration-500"
-      style={{ background: 'var(--color-bg-attractions)' }}
+      className="relative overflow-hidden transition-colors duration-500 bg-villa-dark dark:bg-black"
     >
       {/* ── Parallax background ──────────────────────────────────── */}
       <motion.div className="absolute inset-0 scale-125" style={{ y: bgY }}>
         <Image
-          src="/images/wayanad-mist-hills.jpg"
+          src="/images/wayanad image2.jpg"
           alt="Wayanad misty highlands"
           fill
           className="object-cover transition-all duration-500 brightness-[0.8] dark:brightness-[1.0]"
@@ -354,14 +353,8 @@ export default function NearbyAttractions() {
           sizes="100vw"
           priority
         />
-        {/* Multi-layer cinematic overlay */}
-        <div
-          className="absolute inset-0 transition-opacity duration-500"
-          style={{
-            background:
-              'linear-gradient(to bottom, var(--color-overlay-from) 0%, var(--color-overlay-mid) 35%, var(--color-overlay-to) 100%)',
-          }}
-        />
+        {/* Dark overlay to give a lightly dark feel */}
+        <div className="absolute inset-0 bg-villa-dark/40 dark:bg-black/50 transition-colors duration-500" />
         {/* Warm centre bloom */}
         <div
           className="absolute inset-0 transition-opacity duration-500"
@@ -423,7 +416,7 @@ export default function NearbyAttractions() {
               fontSize:'clamp(44px,5.5vw,72px)',
               fontWeight:300,
               lineHeight:1.06,
-              color:'var(--color-card-title)',
+              color:'#FAF7F2',
               margin:0,
               letterSpacing:'-0.01em',
               transition: 'color 0.5s ease',
@@ -478,7 +471,7 @@ export default function NearbyAttractions() {
               fontWeight:300,
               fontStyle:'italic',
               lineHeight:1.8,
-              color:'var(--color-quote)',
+              color:'rgba(250,247,242,0.85)',
               marginBottom:20,
               transition: 'color 0.5s ease',
             }}>

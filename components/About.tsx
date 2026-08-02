@@ -7,8 +7,9 @@ import aboutImg from '@/app/gallery/img2.jpeg';
 
 export default function About() {
   return (
-    <section className="py-24 md:py-32 bg-cream dark:bg-[#120E0A] text-villa-dark dark:text-sand overflow-hidden transition-colors duration-500">
-      <div className="container mx-auto px-6">
+    <section className="py-24 md:py-32 bg-transparent text-villa-dark dark:text-sand relative transition-colors duration-500">
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
           {/* Image Column */}

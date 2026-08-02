@@ -1,14 +1,38 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion, useSpring, useTransform, useInView } from 'framer-motion';
+import { useRef } from 'react';
+
+function AnimatedCounter({ value, suffix = '' }: { value: number, suffix?: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const spring = useSpring(0, { duration: 2500, bounce: 0 });
+  
+  useEffect(() => {
+    if (isInView) {
+      spring.set(value);
+    }
+  }, [isInView, spring, value]);
+
+  const display = useTransform(spring, (current) => {
+    // Determine decimal places based on original value
+    const hasDecimals = value % 1 !== 0;
+    const formatted = hasDecimals ? current.toFixed(1) : Math.round(current).toString();
+    return formatted + suffix;
+  });
+
+  return <motion.span ref={ref}>{display}</motion.span>;
+}
 
 export default function StatsRibbon() {
   const stats = [
-    { number: "2", label: "Private Villas" },
-    { number: "2", label: "Bedrooms Each" },
-    { number: "100%", label: "Private Pools" },
-    { number: "5.0", label: "Google Rated" },
+    { value: 2, suffix: "", label: "Private Villas" },
+    { value: 2, suffix: "", label: "Bedrooms Each" },
+    { value: 100, suffix: "%", label: "Private Pools" },
+    { value: 5.0, suffix: "", label: "Google Rated" },
   ];
+  
   return (
     <section className="bg-warm-white dark:bg-[#130D08] border-y border-sand-dark dark:border-gold/10 py-8 md:py-10 relative z-20 transition-colors duration-500">
       <div className="container mx-auto px-6">
@@ -23,8 +47,10 @@ export default function StatsRibbon() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
             >
-              <span className="font-display text-4xl text-clay dark:text-gold mb-2 transition-colors duration-500">{stat.number}</span>
-              <span className="font-body text-xs tracking-widest uppercase text-text-muted dark:text-sand/60 transition-colors duration-500">{stat.label}</span>
+              <div className="font-display text-4xl text-clay dark:text-gold mb-2 transition-colors duration-500">
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+              </div>
+              <span className="font-body text-xs tracking-widest uppercase text-text-muted dark:text-sand/60 transition-colors duration-500 text-center">{stat.label}</span>
             </motion.div>
           ))}
         </div>

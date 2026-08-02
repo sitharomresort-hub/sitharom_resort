@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import logoImg from '@/app/gallery/logo.png';
 import { useBooking } from '@/lib/BookingContext';
+import MagneticButton from '@/components/MagneticButton';
 
 export default function Navbar() {
   const { openBooking } = useBooking();
@@ -86,13 +87,14 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              href={link.href}
-              className="text-sm font-medium uppercase tracking-widest hover:text-clay dark:hover:text-gold transition-colors"
-            >
-              {link.name}
-            </Link>
+            <MagneticButton key={link.name} stiffness={200} damping={15}>
+              <Link 
+                href={link.href}
+                className="text-sm font-medium uppercase tracking-widest hover:text-clay dark:hover:text-gold transition-colors px-2 py-1"
+              >
+                {link.name}
+              </Link>
+            </MagneticButton>
           ))}
 
           {/* Desktop Theme Toggle */}
@@ -115,13 +117,15 @@ export default function Navbar() {
             </motion.button>
           )}
 
-          <button 
-            onClick={() => openBooking()}
-            className="relative overflow-hidden bg-clay text-warm-white px-6 py-3 text-sm tracking-widest uppercase hover:bg-clay-light transition-all duration-300 hover:shadow-[0_4px_15px_rgba(181,69,27,0.25)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] group flex items-center justify-center"
-          >
-            <span className="relative z-10">Book Now</span>
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer-sweep pointer-events-none" />
-          </button>
+          <MagneticButton stiffness={150} damping={10}>
+            <button 
+              onClick={() => openBooking()}
+              className="relative overflow-hidden bg-clay text-warm-white px-6 py-3 text-sm tracking-widest uppercase hover:bg-clay-light transition-all duration-300 hover:shadow-[0_4px_15px_rgba(181,69,27,0.25)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] group flex items-center justify-center"
+            >
+              <span className="relative z-10">Book Now</span>
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer-sweep pointer-events-none" />
+            </button>
+          </MagneticButton>
         </nav>
 
         {/* Mobile Menu & Theme Controls */}

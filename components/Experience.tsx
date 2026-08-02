@@ -80,7 +80,7 @@ export default function Experience() {
       <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen">
         
         {/* LEFT SIDE: Immersive Visual Area (65% width on desktop) */}
-        <div className="relative w-full lg:w-[65%] h-[50vh] lg:h-full overflow-hidden bg-[#232323] border-b lg:border-b-0 lg:border-r border-[#B8945B]/15">
+        <div className="relative w-full lg:w-[65%] lg:h-full overflow-hidden bg-[#232323] border-b lg:border-b-0 lg:border-r border-[#B8945B]/15 flex flex-col">
           
           {/* Images Stack with crossfade & parallax drift */}
           {experiences.map((exp, idx) => (
@@ -125,7 +125,7 @@ export default function Experience() {
           />
 
           {/* Left Content Overlay */}
-          <div className="absolute inset-0 z-20 flex flex-col justify-between p-8 md:p-12 lg:p-16 text-[#F7F3EE]">
+          <div className="relative lg:absolute inset-0 z-20 flex flex-col justify-between p-8 md:p-12 lg:p-16 text-[#F7F3EE] min-h-[60vh] lg:min-h-0">
             
             {/* Top Label */}
             <motion.div 
@@ -139,7 +139,7 @@ export default function Experience() {
             </motion.div>
             
             {/* Main Editorial Text */}
-            <div className="max-w-md my-auto py-6 lg:py-0">
+            <div className="max-w-md my-auto py-12 lg:py-0">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -199,7 +199,7 @@ export default function Experience() {
 
         {/* RIGHT SIDE: Forest Green Accordion List (35% width on desktop) */}
         <div 
-          className="relative w-full lg:w-[35%] h-[50vh] lg:h-full flex flex-col justify-center py-8 lg:py-16 px-6 md:px-12 lg:px-8 overflow-y-auto scrollbar-thin scrollbar-thumb-[#B8945B]/30 z-20 bg-[#1F3A32] dark:bg-[#152722] transition-colors duration-500"
+          className="relative w-full lg:w-[35%] h-auto lg:h-full flex flex-col justify-center py-8 lg:py-16 px-6 md:px-12 lg:px-8 overflow-y-visible lg:overflow-y-auto scrollbar-thin scrollbar-thumb-[#B8945B]/30 z-20 bg-[#1F3A32] dark:bg-[#152722] transition-colors duration-500"
         >
           {/* Hand-drawn style floating leaves for luxury boutique forest resort vibe */}
           <div className="absolute right-4 bottom-4 pointer-events-none opacity-[0.06] text-[#B8945B] z-0">

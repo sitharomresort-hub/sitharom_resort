@@ -60,13 +60,34 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-24 bg-cream dark:bg-[#120E0A] text-villa-dark dark:text-sand border-t border-sand-dark dark:border-gold/10 transition-colors duration-500" id="faq">
+    <section 
+      className="relative overflow-hidden py-24 text-villa-dark dark:text-sand border-t border-sand-dark dark:border-gold/10 transition-colors duration-500 bg-transparent" 
+      id="faq"
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <div className="container mx-auto px-6 max-w-3xl">
+      {/* ── Ambient glows ────────────────────────────────────────── */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
+        <div style={{
+          position:'absolute', top:'15%', left:'10%',
+          width:500, height:500, borderRadius:'50%',
+          background:'radial-gradient(circle, var(--color-glow-1) 0%, transparent 70%)',
+          filter:'blur(50px)',
+          transition: 'background 0.5s ease',
+        }}/>
+        <div style={{
+          position:'absolute', bottom:'20%', right:'12%',
+          width:400, height:400, borderRadius:'50%',
+          background:'radial-gradient(circle, var(--color-glow-2) 0%, transparent 70%)',
+          filter:'blur(50px)',
+          transition: 'background 0.5s ease',
+        }}/>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-6 max-w-3xl">
         
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
@@ -98,7 +119,7 @@ export default function FAQ() {
             return (
               <motion.div
                 key={idx}
-                className="bg-warm-white dark:bg-[#1C1610] border border-sand-dark/50 dark:border-gold/10 rounded-2xl overflow-hidden hover:border-gold/30 dark:hover:border-gold/30 shadow-sm transition-luxury duration-500"
+                className="bg-warm-white/80 dark:bg-[#1C1610]/80 backdrop-blur-md border border-sand-dark/50 dark:border-gold/20 rounded-2xl overflow-hidden hover:border-gold/40 dark:hover:border-gold/40 shadow-sm hover:shadow-lg transition-all duration-500"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -127,7 +148,7 @@ export default function FAQ() {
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="p-6 pt-0 border-t border-sand-dark dark:border-gold/10 text-xs md:text-sm font-light text-text-muted dark:text-sand/70 leading-relaxed text-left transition-colors duration-500">
+                      <div className="p-6 pt-0 border-t border-sand-dark/50 dark:border-gold/10 text-xs md:text-sm font-light text-text-muted dark:text-sand/70 leading-relaxed text-left transition-colors duration-500">
                         {faq.a}
                       </div>
                     </motion.div>
@@ -142,3 +163,4 @@ export default function FAQ() {
     </section>
   );
 }
+

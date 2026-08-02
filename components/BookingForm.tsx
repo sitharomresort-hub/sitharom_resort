@@ -1,10 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { MessageCircle } from 'lucide-react';
-import Image from 'next/image';
 
 type FormData = {
   name: string;
@@ -18,14 +16,6 @@ type FormData = {
 
 export default function BookingForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
   
   const onSubmit = (data: FormData) => {
     // Format dates for a more professional look
@@ -58,32 +48,15 @@ export default function BookingForm() {
 
   return (
     <section 
-      ref={sectionRef}
-      className="relative py-28 md:py-36 bg-clay dark:bg-[#120E0A] text-warm-white dark:text-sand overflow-hidden transition-colors duration-500" 
+      className="relative py-28 md:py-36 text-warm-white dark:text-sand overflow-hidden transition-colors duration-500 bg-transparent" 
       id="book"
     >
-      {/* Parallax Background Image */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <motion.div 
-          className="absolute inset-0 h-[124%] -top-[12%] w-full"
-          style={{ y: backgroundY }}
-        >
-          <Image
-            src="/images/booking-bg.png"
-            alt="Luxury pool villa resort under twilight sky"
-            fill
-            className="object-cover object-center pointer-events-none select-none brightness-[0.95] dark:brightness-[0.65] contrast-[0.95] saturate-[0.95] dark:saturate-[0.8] transition-all duration-500"
-            sizes="100vw"
-            priority
-          />
-        </motion.div>
-        {/* Luxury Vignette and Color Blend Overlays */}
-        <div className="absolute inset-0 bg-clay/35 dark:bg-[#120E0A]/45 mix-blend-multiply dark:mix-blend-multiply z-[1] transition-colors duration-500" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-villa-dark/60 z-[2]" />
-        
-        {/* Warm Golden Glow Behind Form */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(201,169,110,0.12)_0%,transparent_70%)] blur-[60px] pointer-events-none z-[2]" />
-      </div>
+      {/* Luxury Vignette and Color Blend Overlays */}
+      <div className="absolute inset-0 bg-clay/10 dark:bg-[#120E0A]/45 mix-blend-multiply dark:mix-blend-multiply z-[1] transition-colors duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-villa-dark/60 z-[2]" />
+      
+      {/* Warm Golden Glow Behind Form */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(201,169,110,0.12)_0%,transparent_70%)] blur-[60px] pointer-events-none z-[2]" />
 
       {/* SVG Grain Noise Filter for realistic luxury texture */}
       <svg className="hidden">

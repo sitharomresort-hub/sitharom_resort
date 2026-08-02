@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 interface ScrollRevealProps {
@@ -11,14 +12,14 @@ interface ScrollRevealProps {
   scale?: number;
 }
 
-export default function ScrollReveal({
+const ScrollReveal = ({
   children,
   delay = 0,
   duration = 0.95, // 0.9s - 1.2s luxury pacing
   y = 35, // Subtle translation
   blur = 4, // Soft blur reveal
   scale = 0.99 // Extremely gentle scaling
-}: ScrollRevealProps) {
+}: ScrollRevealProps) => {
   return (
     <motion.div
       initial={{ 
@@ -45,4 +46,6 @@ export default function ScrollReveal({
       {children}
     </motion.div>
   );
-}
+};
+
+export default memo(ScrollReveal);

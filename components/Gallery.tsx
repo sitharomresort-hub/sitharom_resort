@@ -70,8 +70,8 @@ export default function Gallery() {
   }, [selectedImage]);
 
   return (
-    <section className="py-24 bg-cream dark:bg-[#120E0A] overflow-hidden transition-colors duration-500" id="gallery">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-transparent relative transition-colors duration-500" id="gallery">
+      <div className="container mx-auto px-6 relative z-10">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">

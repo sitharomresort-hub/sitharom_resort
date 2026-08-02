@@ -22,11 +22,12 @@ const amenitiesList = [
 
 export default function Amenities() {
   return (
-    <section className="bg-[#FAF7F2] dark:bg-[#0F0A06] pt-28 pb-20 overflow-hidden relative transition-colors duration-500" id="amenities">
+    <section className="bg-transparent pt-28 pb-20 relative transition-colors duration-500" id="amenities">
+      
       {/* Soft background light-luxury glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-clay/5 blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-clay/10 dark:bg-gold/5 blur-[120px] pointer-events-none z-0" />
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative z-10">
         
         {/* Header */}
         <motion.div 
@@ -60,7 +61,7 @@ function AmenityCard({ amenity, idx }: { amenity: any, idx: number }) {
   
   return (
     <motion.div 
-      className="p-6 md:p-8 group bg-warm-white dark:bg-[#1C1610]/50 backdrop-blur-sm transition-all duration-500 flex flex-col items-start rounded-2xl border border-villa-dark/10 dark:border-warm-white/10 hover:border-gold/30 dark:hover:border-gold/35 hover:bg-cream dark:hover:bg-[#1C1610]/85 hover:shadow-luxury dark:hover:shadow-[0_12px_40px_rgba(22,25,23,0.15)] cursor-pointer"
+      className="p-6 md:p-8 group bg-warm-white/75 dark:bg-[#1C1610]/60 backdrop-blur-md transition-all duration-500 flex flex-col items-start rounded-2xl border border-white/60 dark:border-warm-white/10 hover:border-gold/40 dark:hover:border-gold/35 hover:bg-warm-white/95 dark:hover:bg-[#1C1610]/85 hover:shadow-[0_20px_40px_-15px_rgba(201,169,110,0.2)] dark:hover:shadow-[0_15px_35px_-10px_rgba(201,169,110,0.1)] hover:-translate-y-2 cursor-pointer relative z-10"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

@@ -25,8 +25,8 @@ const villas = [
 
 export default function Villas() {
   return (
-    <section className="py-24 bg-sand dark:bg-[#18130E] relative transition-colors duration-500" id="villas">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-transparent relative transition-colors duration-500" id="villas">
+      <div className="container mx-auto px-6 relative z-10">
         
         {/* Section Header */}
         <motion.div 
@@ -47,7 +47,7 @@ export default function Villas() {
           {villas.map((villa, idx) => (
             <motion.div 
               key={villa.id} 
-              className="group relative bg-cream dark:bg-[#120E0A] border border-transparent dark:border-gold/10 overflow-hidden flex flex-col h-[500px] transition-colors duration-500"
+              className="group relative bg-cream dark:bg-[#120E0A] border border-transparent dark:border-gold/10 overflow-hidden flex flex-col h-[500px] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(181,69,27,0.15)] dark:hover:shadow-[0_20px_40px_-15px_rgba(201,169,110,0.1)]"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -61,7 +61,7 @@ export default function Villas() {
                   fill
                   placeholder="blur"
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute top-4 right-4 bg-cream/90 dark:bg-[#120E0A]/90 backdrop-blur-sm px-3 py-1 text-[10px] tracking-widest uppercase font-medium text-clay dark:text-gold shadow-sm z-10 transition-colors duration-500">
                   {villa.tag}

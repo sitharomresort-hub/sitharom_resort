@@ -40,7 +40,7 @@
   }
 
   body {
-    @apply bg-cream text-villa-dark antialiased transition-colors duration-500 dark:bg-[#120E0A] dark:text-sand;
+    @apply bg-cream text-villa-dark antialiased transition-colors duration-500 dark:bg-[#0C0906] dark:text-sand;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -55,12 +55,15 @@
 }
 
 /* ── Premium Scrollbar ───────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #2C1F14; }
-::-webkit-scrollbar-thumb { background: #B5451B; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #C8633E; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #1a1108; }
+::-webkit-scrollbar-thumb { 
+  background: linear-gradient(to bottom, #C9A96E, #B5451B); 
+  border-radius: 3px; 
+}
+::-webkit-scrollbar-thumb:hover { background: #C9A96E; }
 
-/* ── Shimmer sweep keyframe (used in BookingForm CTA) ────────── */
+/* ── Shimmer sweep keyframe ──────────────────────────────────── */
 @keyframes shimmer-sweep {
   0%   { transform: translateX(-100%); }
   60%  { transform: translateX(100%); }
@@ -78,25 +81,39 @@
 
 /* ── Gold shimmer text ───────────────────────────────────────── */
 .text-shimmer {
-  background: linear-gradient(90deg, #C9A96E 0%, #F0D89A 50%, #C9A96E 100%);
+  background: linear-gradient(90deg, #C9A96E 0%, #F0D89A 40%, #E8C678 60%, #C9A96E 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer-sweep 3s linear infinite;
+  animation: shimmer-text 4s linear infinite;
+}
+
+@keyframes shimmer-text {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 /* ── Glass card utility ──────────────────────────────────────── */
 .glass-card {
-  background: rgba(255, 253, 249, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(201, 169, 110, 0.15);
+  background: rgba(255, 253, 249, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 169, 110, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.glass-card-dark {
+  background: rgba(20, 14, 8, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(201, 169, 110, 0.06);
 }
 
 /* ── Section divider line ────────────────────────────────────── */
 .divider-gold {
-  width: 40px;
+  width: 48px;
   height: 1px;
   background: linear-gradient(to right, transparent, #C9A96E, transparent);
   margin: 0 auto;
@@ -104,7 +121,7 @@
 
 /* ── Soft text selection ─────────────────────────────────────── */
 ::selection {
-  background: rgba(181, 69, 27, 0.2);
+  background: rgba(201, 169, 110, 0.25);
   color: #2C1F14;
 }
 
@@ -132,3 +149,131 @@
   animation: mist-drift 32s ease-in-out infinite reverse;
 }
 
+/* ── Parallax slow drift ─────────────────────────────────────── */
+@keyframes slow-drift {
+  0%   { transform: scale(1.05) translateY(0px); }
+  50%  { transform: scale(1.08) translateY(-12px); }
+  100% { transform: scale(1.05) translateY(0px); }
+}
+
+.animate-slow-drift {
+  animation: slow-drift 20s ease-in-out infinite;
+}
+
+/* ── Gold particle float ─────────────────────────────────────── */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  20%       { opacity: 1; }
+  80%       { opacity: 0.6; }
+  100%      { transform: translateY(-120px) translateX(20px) scale(0.5); opacity: 0; }
+}
+
+/* ── Elegant border pulse ────────────────────────────────────── */
+@keyframes border-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0); }
+  50%       { box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.12); }
+}
+
+.animate-border-pulse {
+  animation: border-pulse 3s ease-in-out infinite;
+}
+
+/* ── Luxury button shine ─────────────────────────────────────── */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-luxury::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+.btn-luxury:hover::after {
+  animation: btn-shine 0.7s ease forwards;
+}
+
+@keyframes btn-shine {
+  0%   { left: -75%; }
+  100% { left: 125%; }
+}
+
+/* ── Smooth section reveal ───────────────────────────────────── */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), 
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Hero particle dots ──────────────────────────────────────── */
+.hero-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.6);
+  animation: float-particle var(--duration, 6s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ── Noise texture overlay ───────────────────────────────────── */
+.texture-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+  pointer-events: none;
+}
+
+/* ── Luxury card hover ───────────────────────────────────────── */
+.luxury-card {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.4s ease;
+}
+
+.luxury-card:hover {
+  transform: translateY(-6px);
+}
+
+/* ── Horizontal scroll hide scrollbar ───────────────────────── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Gold line animated ──────────────────────────────────────── */
+@keyframes line-expand {
+  from { width: 0; }
+  to   { width: 48px; }
+}
+
+.animate-line-expand {
+  animation: line-expand 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Rotating border gradient ────────────────────────────────── */
+@keyframes rotate-border {
+  0%   { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
