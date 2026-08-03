@@ -68,22 +68,36 @@ export default function BookingWizard() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/booking/availability', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          startDate: data.startDate,
-          endDate: data.endDate,
-          adults: Number(data.adults),
-          children: Number(data.children)
-        })
-      });
+      // MOCK ROOMS instead of backend fetch for WhatsApp flow
+      await new Promise(r => setTimeout(r, 800)); // simulate loading
+      
+      const rooms: RoomAvailability[] = [
+        {
+          roomId: 'villa-ilhal',
+          roomName: 'Ilhal Villa (Private Pool)',
+          description: 'Luxury private pool villa with serene forest views and premium amenities.',
+          basePrice: 15000,
+          images: ['/images/wayanad-mist-hills.jpg'],
+          amenities: ['Private Pool', 'Free WiFi', 'Air Conditioning'],
+          availableCount: 1,
+          taxAmount: 0,
+          currency: 'INR',
+          maxOccupancy: 2
+        },
+        {
+          roomId: 'villa-sitharom',
+          roomName: 'Sitharom Suite',
+          description: 'Premium luxury suite offering panoramic valley views and exclusive access.',
+          basePrice: 12000,
+          images: ['/images/tropical_shadows_bg.png'],
+          amenities: ['Balcony View', 'Free WiFi', 'Breakfast Included'],
+          availableCount: 1,
+          taxAmount: 0,
+          currency: 'INR',
+          maxOccupancy: 2
+        }
+      ];
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch availability. Please select other dates.');
-      }
-
-      const rooms: RoomAvailability[] = await response.json();
       setAvailableRooms(rooms);
       
       // Auto-select room if context specifies selectedRoomType
@@ -107,47 +121,104 @@ export default function BookingWizard() {
     }
   };
 
-  // Submit secure reservation
+  // Submit secure reservation via WhatsApp
   const confirmReservation = async (data: BookingFormData) => {
     if (!selectedRoom) return;
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/booking/reserve', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          roomId: selectedRoom.roomId,
-          dates: {
-            startDate: data.startDate,
-            endDate: data.endDate
-          },
-          occupancy: {
-            adults: Number(data.adults),
-            children: Number(data.children)
-          },
-          guest: {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            phone: data.phone,
-            specialRequests: data.specialRequests
-          },
-          promoCode: appliedPromo || undefined,
-          addons: selectedAddons
-        })
+      const nights = calculateNights();
+      const baseRent = getRoomTotalBeforeDiscount();
+      const gst = getTaxAmount();
+      const grandTotal = getTotalPrice();
+
+      const msg = `🏡 NEW RESORT BOOKING ENQUIRY
+
+Hello,
+
+I would like to reserve a stay.
+
+━━━━━━━━━━━━━━
+
+👤 Guest Details
+
+Name:
+${data.firstName} ${data.lastName}
+
+Phone:
+${data.phone}
+
+Email:
+${data.email}
+
+━━━━━━━━━━━━━━
+
+🏡 Stay Details
+
+Villa:
+${selectedRoom.roomName}
+
+Check-in:
+${data.startDate}
+
+Check-out:
+${data.endDate}
+
+Duration:
+${nights} Night${nights > 1 ? 's' : ''}
+
+Guests:
+${data.adults} Adult${data.adults > 1 ? 's' : ''}${data.children > 0 ? `, ${data.children} Children` : ''}
+
+━━━━━━━━━━━━━━
+
+💰 Booking Summary
+
+Base Rent:
+₹${baseRent.toLocaleString()}
+
+GST (18%):
+₹${gst.toLocaleString()}
+
+Grand Total:
+₹${grandTotal.toLocaleString()}
+
+━━━━━━━━━━━━━━
+
+📝 Special Requests
+
+${data.specialRequests || 'None'}
+
+━━━━━━━━━━━━━━
+
+Please confirm availability.
+
+Thank you.`;
+
+      const encodedMsg = encodeURIComponent(msg);
+      
+      setReservationResult({
+        reservationId: 'WA-' + Date.now(),
+        status: 'PENDING',
+        provider: 'whatsapp',
+        confirmationCode: 'WHATSAPP-ENQ',
+        checkIn: data.startDate,
+        checkOut: data.endDate,
+        totalPrice: grandTotal,
+        currency: 'INR'
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Reservation could not be processed.');
+      
+      setStep(4);
+      
+      // Attempt to open WhatsApp
+      const wpUrl = `https://wa.me/917306197613?text=${encodedMsg}`;
+      const newWin = window.open(wpUrl, '_blank');
+      
+      if (!newWin) {
+        setError('Unable to open WhatsApp automatically. Please click the button below to contact us.');
       }
-
-      const result = await response.json();
-      setReservationResult(result);
-      setStep(4); // Go to success page
     } catch (err: any) {
-      setError(err.message || 'Failed to confirm reservation.');
+      setError(err.message || 'Failed to generate reservation.');
     } finally {
       setLoading(false);
     }
@@ -532,8 +603,9 @@ export default function BookingWizard() {
                       placeholder="John"
                       {...register('firstName', { required: true })}
                       style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20"
+                      className={`border focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20 ${errors.firstName ? 'border-red-500/50 focus:border-red-500' : 'border-warm-white/15 focus:border-gold'}`}
                     />
+                    {errors.firstName && <span className="text-[10px] text-red-400">Required</span>}
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Last Name</label>
@@ -542,8 +614,9 @@ export default function BookingWizard() {
                       placeholder="Doe"
                       {...register('lastName', { required: true })}
                       style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20"
+                      className={`border focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20 ${errors.lastName ? 'border-red-500/50 focus:border-red-500' : 'border-warm-white/15 focus:border-gold'}`}
                     />
+                    {errors.lastName && <span className="text-[10px] text-red-400">Required</span>}
                   </div>
                 </div>
 
@@ -555,18 +628,20 @@ export default function BookingWizard() {
                       placeholder="john.doe@gmail.com"
                       {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
                       style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20"
+                      className={`border focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20 ${errors.email ? 'border-red-500/50 focus:border-red-500' : 'border-warm-white/15 focus:border-gold'}`}
                     />
+                    {errors.email && <span className="text-[10px] text-red-400">Valid email required</span>}
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Phone / WhatsApp</label>
                     <input 
                       type="tel"
                       placeholder="+91 98765 43210"
-                      {...register('phone', { required: true })}
+                      {...register('phone', { required: true, pattern: /^(?:\+91|91)?[6789]\d{9}$/ })}
                       style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
-                      className="border border-warm-white/15 focus:border-gold focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20"
+                      className={`border focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20 ${errors.phone ? 'border-red-500/50 focus:border-red-500' : 'border-warm-white/15 focus:border-gold'}`}
                     />
+                    {errors.phone && <span className="text-[10px] text-red-400">Valid Indian mobile required</span>}
                   </div>
                 </div>
 
@@ -682,7 +757,7 @@ export default function BookingWizard() {
             </motion.form>
           )}
 
-          {/* STEP 4: SUCCESSFlow */}
+          {/* STEP 4: SUCCESSFlow (WhatsApp Redirect) */}
           {step === 4 && reservationResult && (
             <motion.div 
               key="step5"
@@ -691,31 +766,42 @@ export default function BookingWizard() {
               exit={{ opacity: 0, scale: 0.96 }}
               className="text-center py-6 max-w-md mx-auto flex flex-col items-center gap-5"
             >
-              <div className="w-14 h-14 rounded-full bg-gold/15 border border-gold/30 flex items-center justify-center text-gold mb-1">
-                <Check size={26} />
+              <div className="w-14 h-14 rounded-full bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] mb-1">
+                <CheckCircle2 size={26} />
               </div>
               
-              <span className="text-[10px] tracking-[0.25em] uppercase text-gold font-semibold">Reservation Confirmed</span>
-              <h3 className="text-2xl font-display font-light text-warm-white">Your Sanctuary Awaits</h3>
+              <span className="text-[10px] tracking-[0.25em] uppercase text-[#25D366] font-semibold">Redirecting to WhatsApp</span>
+              <h3 className="text-2xl font-display font-light text-warm-white">Complete Your Enquiry</h3>
               
               <p className="text-xs opacity-75 font-light leading-relaxed">
-                Thank you for selecting Sitharom. A secure confirmation email along with check-in instructions and plantation guide has been sent to your email.
+                Your reservation details are ready. {error ? error : "We are opening WhatsApp for you to finalize the booking with our team."}
               </p>
 
               <div className="bg-villa-dark/60 border border-gold/15 p-5 w-full text-left flex flex-col gap-3 rounded-lg my-2 text-xs">
                 <div className="flex justify-between">
-                  <span className="opacity-60">Confirmation Code:</span>
-                  <span className="font-mono text-gold font-bold">{reservationResult.confirmationCode}</span>
+                  <span className="opacity-60">Status:</span>
+                  <span className="font-mono text-gold font-bold">Pending Confirmation</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="opacity-60">Dates:</span>
                   <span className="text-warm-white">{reservationResult.checkIn} to {reservationResult.checkOut}</span>
                 </div>
                 <div className="flex justify-between border-t border-warm-white/10 pt-2.5 mt-1">
-                  <span className="opacity-60 font-medium">Amount Secured:</span>
+                  <span className="opacity-60 font-medium">Estimated Total:</span>
                   <span className="font-bold text-gold">₹{reservationResult.totalPrice.toLocaleString()} {reservationResult.currency}</span>
                 </div>
               </div>
+
+              {error && (
+                <a 
+                  href={`https://wa.me/917306197613`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#25D366] text-villa-dark text-[10px] font-bold tracking-widest uppercase px-8 py-3.5 hover:bg-[#1EBE5D] rounded-full transition-all w-full text-center mt-2 shadow-[0_4px_15px_rgba(37,211,102,0.2)]"
+                >
+                  Open WhatsApp Manually
+                </a>
+              )}
 
               <button 
                 onClick={() => {
@@ -726,9 +812,10 @@ export default function BookingWizard() {
                   setPromoCode('');
                   setAppliedPromo(null);
                   setPromoDiscount(0);
-                  closeBooking(); // Close the modal!
+                  setError(null);
+                  closeBooking();
                 }}
-                className="bg-gold text-villa-dark text-[10px] font-semibold tracking-widest uppercase px-8 py-3.5 hover:bg-[#D4B780] rounded-full transition-all mt-2"
+                className={`text-[10px] font-semibold tracking-widest uppercase px-8 py-3 rounded-full transition-all mt-2 ${error ? 'bg-transparent border border-gold/40 text-gold hover:bg-gold/10' : 'bg-gold text-villa-dark hover:bg-[#D4B780]'}`}
               >
                 Close Booking Engine
               </button>

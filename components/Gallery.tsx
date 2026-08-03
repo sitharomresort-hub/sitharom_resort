@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 
 import img3 from '@/app/gallery/img3.jpeg';
-import img4 from '@/app/gallery/img4.jpeg';
+
 import img5 from '@/app/gallery/img5.jpeg';
 import img6 from '@/app/gallery/img6.jpeg';
 import img7 from '@/app/gallery/img7.jpeg';
@@ -16,13 +16,13 @@ import img8 from '@/app/gallery/img8.jpeg';
 import img9 from '@/app/gallery/img9.jpeg';
 
 const images = [
-  { id: 'img-3', src: img3, label: 'Living Area' },
-  { id: 'img-4', src: img4, label: 'Bathroom' },
-  { id: 'img-5', src: img5, label: 'Bedroom' },
-  { id: 'img-6', src: img6, label: 'Balcony View' },
-  { id: 'img-7', src: img7, label: 'Pool Side' },
-  { id: 'img-8', src: img8, label: 'Dining Space' },
-  { id: 'img-9', src: img9, label: 'Exterior' },
+  { id: 'img-3', src: img3, label: 'Dining Space' },
+
+  { id: 'img-5', src: img5, label: 'Living Area' },
+  { id: 'img-6', src: img6, label: 'Bedroom' },
+  { id: 'img-7', src: img7, label: 'Exterior' },
+  { id: 'img-8', src: img8, label: 'Pool Side' },
+  { id: 'img-9', src: img9, label: 'Balcony View' },
 ];
 
 export default function Gallery() {

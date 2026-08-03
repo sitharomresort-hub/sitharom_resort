@@ -11,14 +11,14 @@ const villas = [
     id: 'ithal',
     name: 'Ithal Villa',
     price: 'Premium',
-    tag: '2 Bedrooms',
+    tag: '4 Bedrooms',
     image: room1Img
   },
   {
     id: 'harsham',
     name: 'Harsham Villa',
     price: 'Premium',
-    tag: '2 Bedrooms',
+    tag: '4 Bedrooms',
     image: room2Img
   }
 ];

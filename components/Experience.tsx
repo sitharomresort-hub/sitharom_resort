@@ -9,64 +9,36 @@ const experiences = [
     num: "01",
     title: "Private Pool & Relaxation",
     desc: "Unwind in your own private infinity plunge pool with misty forest views as your backdrop. A sanctuary of pure seclusion and calm.",
-    image: "/images/experiences/pool.png",
+    image: "/images/experiences/poolvilla.jpeg",
     glow: "rgba(184, 138, 68, 0.25)" // Subtle Bronze Glow
   },
   {
     num: "02",
     title: "Campfire Nights",
     desc: "Gather around a crackling campfire under an open Wayanad sky. Roast marshmallows, sip warm spiced tea, and let the quiet night speak.",
-    image: "/images/experiences/campfire.png",
+    image: "/images/campfire.jpg",
     glow: "rgba(184, 138, 68, 0.22)" // Subtle Gold Glow
   },
   {
     num: "03",
-    title: "BBQ Under the Stars",
-    desc: "Savor a premium outdoor dining experience, with grilled delicacies prepared to perfection under a canopy of stars.",
-    image: "/images/experiences/bbq.png",
-    glow: "rgba(184, 138, 68, 0.2)" // Subtle Dark Bronze Glow
-  },
-  {
-    num: "04",
-    title: "Plantation Walks",
-    desc: "Take a slow, guided morning walk through lush coffee and spice plantations, draped in Wayanad's signature mist.",
-    image: "/images/experiences/plantation.png",
-    glow: "rgba(184, 138, 68, 0.18)" // Muted Forest Bronze Glow
-  },
-  {
-    num: "05",
     title: "Indoor Games",
     desc: "Relax in our luxury indoor lounge with classic games like Carrom, Chess, and cards. Perfect for cozy, rain-swept afternoons.",
-    image: "/images/experiences/indoor.png",
+    image: "/images/indoor-games.jpg",
     glow: "rgba(184, 138, 68, 0.2)" // Warm Candlelight Bronze Glow
   },
   {
-    num: "06",
-    title: "Badminton & Outdoor Play",
-    desc: "Re-energize with friendly matches of Badminton on our manicured green lawns, enveloped by towering forest trees.",
-    image: "/images/experiences/outdoor.png",
-    glow: "rgba(184, 138, 68, 0.22)" // Sunset Bronze Glow
-  },
-  {
-    num: "07",
+    num: "04",
     title: "Couple Package",
     desc: "A romantic getaway curated exclusively for couples. Includes intimate dining and special arrangements.",
-    image: "/images/experiences/couple.png",
+    image: "/images/experiences/couple-new.png",
     glow: "rgba(184, 138, 68, 0.2)"
   },
   {
-    num: "08",
+    num: "05",
     title: "Family",
     desc: "Create lasting memories with your loved ones. Activities and spaces designed for all age groups.",
-    image: "/images/experiences/family.png",
+    image: "/images/experiences/family-new.png",
     glow: "rgba(184, 138, 68, 0.22)"
-  },
-  {
-    num: "09",
-    title: "Strangers camp",
-    desc: "Connect with nature and new friends. A unique camping experience in the heart of the Wayanad forest.",
-    image: "/images/experiences/camp.png",
-    glow: "rgba(184, 138, 68, 0.18)"
   }
 ];
 
