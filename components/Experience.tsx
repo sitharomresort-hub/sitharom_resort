@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { adminData } from '@/lib/adminData';
+import { useEffect } from 'react';
 
 const experiences = [
   {
@@ -45,6 +47,24 @@ const experiences = [
 export default function Experience() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [localExperiences, setLocalExperiences] = useState(experiences);
+
+  useEffect(() => {
+    const poolUrl = adminData.getSiteImageUrl('exp_pool', '/images/experiences/poolvilla.jpeg');
+    const campfireUrl = adminData.getSiteImageUrl('experience_campfire', '/images/campfire.jpg');
+    const gamesUrl = adminData.getSiteImageUrl('exp_games', '/images/indoor-games.jpg');
+    const coupleUrl = adminData.getSiteImageUrl('exp_couple', '/images/experiences/couple-new.png');
+    const familyUrl = adminData.getSiteImageUrl('exp_family', '/images/experiences/family-new.png');
+    
+    setLocalExperiences(prev => prev.map(exp => {
+      if (exp.num === "01") return { ...exp, image: poolUrl };
+      if (exp.num === "02") return { ...exp, image: campfireUrl };
+      if (exp.num === "03") return { ...exp, image: gamesUrl };
+      if (exp.num === "04") return { ...exp, image: coupleUrl };
+      if (exp.num === "05") return { ...exp, image: familyUrl };
+      return exp;
+    }));
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY, currentTarget } = e;
@@ -76,7 +96,7 @@ export default function Experience() {
         <div className="relative w-full lg:w-[65%] lg:h-full overflow-hidden bg-[#232323] border-b lg:border-b-0 lg:border-r border-[#B8945B]/15 flex flex-col">
           
           {/* Images Stack with crossfade & parallax drift */}
-          {experiences.map((exp, idx) => (
+          {localExperiences.map((exp, idx) => (
             <motion.div
               key={idx}
               className="absolute inset-0 w-full h-full"
@@ -101,6 +121,7 @@ export default function Experience() {
                   src={exp.image}
                   alt={exp.title}
                   fill
+                  unoptimized={exp.image.startsWith('/')}
                   className="object-cover object-center filter brightness-[0.95] contrast-[1.02] saturate-[1.05]"
                   sizes="(max-width: 1024px) 100vw, 65vw"
                   priority={idx === 0}
@@ -215,7 +236,7 @@ export default function Experience() {
           </div>
 
           <div className="relative w-full max-w-xl mx-auto space-y-4 py-4 z-10">
-            {experiences.map((exp, idx) => {
+            {localExperiences.map((exp, idx) => {
               const isActive = activeIndex === idx;
               return (
                 <div 

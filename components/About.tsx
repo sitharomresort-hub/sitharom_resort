@@ -3,9 +3,18 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import aboutImg from '@/app/gallery/img2.jpeg';
+import aboutImgStatic from '@/app/gallery/img2.jpeg';
+import { useEffect, useState } from 'react';
+import { adminData } from '@/lib/adminData';
 
 export default function About() {
+  const [aboutImgUrl, setAboutImgUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const url = adminData.getSiteImageUrl('about_main', aboutImgStatic.src);
+    setAboutImgUrl(url);
+  }, []);
+
   return (
     <section className="py-24 md:py-32 bg-transparent text-villa-dark dark:text-sand relative transition-colors duration-500">
       
@@ -21,14 +30,16 @@ export default function About() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="relative aspect-[4/5] w-full max-w-md mx-auto z-10">
-              <Image 
-                src={aboutImg} 
-                alt="Luxury Villa Interior"
-                fill
-                placeholder="blur"
-                className="object-cover rounded-t-full"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+              {aboutImgUrl && (
+                <Image 
+                  src={aboutImgUrl} 
+                  alt="Luxury Villa Interior"
+                  fill
+                  unoptimized={aboutImgUrl.startsWith('/')}
+                  className="object-cover rounded-t-full"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              )}
               <div className="absolute -inset-4 border border-clay/30 dark:border-gold/30 rounded-t-full -z-10 transition-colors duration-500" />
             </div>
 

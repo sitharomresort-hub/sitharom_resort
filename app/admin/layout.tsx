@@ -12,7 +12,8 @@ import {
   Menu, 
   X, 
   ChevronRight,
-  User
+  User,
+  Image as ImageIcon
 } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -40,6 +41,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: 'Inquiries', href: '/admin/inquiries', icon: Inbox },
     { name: 'Rates & Block Dates', href: '/admin/rates-calendar', icon: Calendar },
     { name: 'Content Manager', href: '/admin/content-manager', icon: FileText },
+    { name: 'Image Library', href: '/admin/image-library', icon: ImageIcon },
   ];
 
   const getPageTitle = () => {
@@ -47,6 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (pathname === '/admin/inquiries') return 'Booking Inquiries';
     if (pathname === '/admin/rates-calendar') return 'Pricing & Availability';
     if (pathname === '/admin/content-manager') return 'Website Content Manager';
+    if (pathname === '/admin/image-library') return 'Image Library';
     return 'Admin Panel';
   };
 

@@ -8,10 +8,8 @@ import {
   Tv, 
   Wifi, 
   Refrigerator, 
-  Coffee,
   Utensils,
-  Waves,
-  Snowflake
+  Waves
 } from 'lucide-react';
 
 const amenitiesList = [
@@ -20,10 +18,8 @@ const amenitiesList = [
   { icon: Tv, name: 'Smart TV', desc: 'Premium entertainment at your fingertips.' },
   { icon: Wifi, name: 'High-Speed WiFi', desc: 'Seamless high-speed internet connectivity throughout the villa.' },
   { icon: Refrigerator, name: 'Mini Refrigerator', desc: 'Keep your beverages and snacks perfectly chilled.' },
-  { icon: Utensils, name: 'Fully Equipped Kitchen', desc: 'Complete kitchen setup for your culinary needs.' },
+  { icon: Utensils, name: 'Kitchen', desc: 'kitchen setup for your culinary needs.' },
   { icon: Waves, name: 'Infinity Pool', desc: 'Relax and rejuvenate in our private pristine infinity pool.' },
-  { icon: Snowflake, name: 'Air Conditioning', desc: 'Climate-controlled comfort in every room.' },
-  { icon: Coffee, name: 'Welcome Coffee', desc: 'Begin your stay with our signature complimentary brew.' },
 ];
 
 export default function Amenities() {

@@ -3,12 +3,21 @@
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import heroBg from '@/app/gallery/bg1.jpeg';
+import heroBgStatic from '@/app/gallery/bg1.jpeg';
 import { useBooking } from '@/lib/BookingContext';
 import MagneticButton from '@/components/MagneticButton';
+import { useEffect, useState } from 'react';
+import { adminData } from '@/lib/adminData';
 
 export default function Hero() {
   const { openBooking } = useBooking();
+  const [heroImgUrl, setHeroImgUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch dynamic hero bg from admin settings, falling back to static
+    const url = adminData.getSiteImageUrl('hero_bg', heroBgStatic.src);
+    setHeroImgUrl(url);
+  }, []);
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -33,15 +42,17 @@ export default function Hero() {
     <section className="relative w-full h-screen flex flex-col justify-center items-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={heroBg}
-          alt="Sitharom Pool Villa Background"
-          fill
-          priority
-          quality={100}
-          placeholder="blur"
-          className="object-cover object-center md:object-[center_80%]"
-        />
+        {heroImgUrl && (
+          <Image
+            src={heroImgUrl}
+            alt="Sitharom Pool Villa Background"
+            fill
+            priority
+            quality={100}
+            unoptimized={heroImgUrl.startsWith('/')}
+            className="object-cover object-center md:object-[center_80%]"
+          />
+        )}
         <div className="absolute inset-0 bg-villa-dark/30" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.6)_0%,transparent_50%)]" />
         <div className="absolute inset-0 bg-gradient-to-t from-villa-dark/60 via-transparent to-villa-dark/20" />

@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import room1Img from '@/app/gallery/room1.jpeg';
-import room2Img from '@/app/gallery/room2.jpeg';
+import room1ImgStatic from '@/app/gallery/room1.jpeg';
+import room2ImgStatic from '@/app/gallery/room2.jpeg';
+import { useEffect, useState } from 'react';
+import { adminData } from '@/lib/adminData';
 
 const villas = [
   {
@@ -12,18 +14,29 @@ const villas = [
     name: 'Ithal Villa',
     price: 'Premium',
     tag: '4 Bedrooms',
-    image: room1Img
+    staticImage: room1ImgStatic,
+    imageKey: 'ithal_main'
   },
   {
     id: 'harsham',
     name: 'Harsham Villa',
     price: 'Premium',
     tag: '4 Bedrooms',
-    image: room2Img
+    staticImage: room2ImgStatic,
+    imageKey: 'harsham_main'
   }
 ];
 
 export default function Villas() {
+  const [villaImages, setVillaImages] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    setVillaImages({
+      ithal: adminData.getSiteImageUrl('ithal_main', room1ImgStatic.src),
+      harsham: adminData.getSiteImageUrl('harsham_main', room2ImgStatic.src)
+    });
+  }, []);
+
   return (
     <section className="py-24 bg-transparent relative transition-colors duration-500" id="villas">
       <div className="container mx-auto px-6 relative z-10">
@@ -55,14 +68,16 @@ export default function Villas() {
             >
               {/* Image Container */}
               <div className="relative h-3/4 w-full overflow-hidden">
-                <Image 
-                  src={villa.image} 
-                  alt={villa.name}
-                  fill
-                  placeholder="blur"
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                {villaImages[villa.id] && (
+                  <Image 
+                    src={villaImages[villa.id]} 
+                    alt={villa.name}
+                    fill
+                    unoptimized={villaImages[villa.id]?.startsWith('/')}
+                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                )}
                 <div className="absolute top-4 right-4 bg-cream/90 dark:bg-[#120E0A]/90 backdrop-blur-sm px-3 py-1 text-[10px] tracking-widest uppercase font-medium text-clay dark:text-gold shadow-sm z-10 transition-colors duration-500">
                   {villa.tag}
                 </div>

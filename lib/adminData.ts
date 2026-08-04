@@ -45,6 +45,23 @@ export interface AttractionItem {
   drive: string;
 }
 
+export interface ImageItem {
+  id: string;
+  name: string;
+  url: string; // The path like /images/uploads/filename.jpg
+  category: string;
+  size: string; // e.g., '1.2 MB'
+  usage: string; // e.g., 'Hero Section, Ithal Villa'
+  uploadDate: string;
+}
+
+export interface SiteImageSlot {
+  id: string; // e.g. 'hero_bg'
+  name: string; // e.g. 'Homepage Hero Background'
+  description: string;
+  url: string; // default or uploaded URL
+}
+
 // Seed Data
 const initialInquiries: Inquiry[] = [
   {
@@ -226,6 +243,102 @@ const initialAttractions: AttractionItem[] = [
   { id: 'attr_8', name: 'Kalpetta Town', type: 'Local Market', km: '18 km', drive: '35 min' }
 ];
 
+const initialImages: ImageItem[] = [
+  {
+    id: 'img_1',
+    name: 'Wayanad Misty Hills',
+    url: '/images/wayanad-mist-hills.jpg',
+    category: 'Villas',
+    size: '1.4 MB',
+    usage: 'Hero Section, Amenities',
+    uploadDate: '2026-05-10T10:00:00.000Z'
+  },
+  {
+    id: 'img_2',
+    name: 'Harsham Villa Exterior',
+    url: '/images/harsham-villa-1.jpg',
+    category: 'Villas',
+    size: '2.1 MB',
+    usage: 'Harsham Villa Detail',
+    uploadDate: '2026-05-12T14:30:00.000Z'
+  },
+  {
+    id: 'img_3',
+    name: 'Ithal Villa Pool',
+    url: '/images/ithal-pool-sunset.jpg',
+    category: 'Villas',
+    size: '1.8 MB',
+    usage: 'Ithal Villa Detail',
+    uploadDate: '2026-05-15T09:15:00.000Z'
+  },
+  {
+    id: 'img_4',
+    name: 'Luxury Dining Setup',
+    url: '/images/luxury-dining.jpg',
+    category: 'Dining',
+    size: '1.5 MB',
+    usage: 'Experience Packages',
+    uploadDate: '2026-05-20T16:45:00.000Z'
+  }
+];
+
+const initialSiteImageSlots: SiteImageSlot[] = [
+  {
+    id: 'hero_bg',
+    name: 'Homepage Hero Background',
+    description: 'The large main image at the top of the homepage.',
+    url: ''
+  },
+  {
+    id: 'about_main',
+    name: 'About Section Image',
+    description: 'Image displayed next to the About text on the homepage.',
+    url: ''
+  },
+  {
+    id: 'ithal_main',
+    name: 'Ithal Villa Cover',
+    description: 'Main image for Ithal Villa in the Villas section.',
+    url: ''
+  },
+  {
+    id: 'harsham_main',
+    name: 'Harsham Villa Cover',
+    description: 'Main image for Harsham Villa in the Villas section.',
+    url: ''
+  },
+  {
+    id: 'exp_pool',
+    name: 'Experience: Private Pool',
+    description: 'Image for Private Pool & Relaxation experience.',
+    url: ''
+  },
+  {
+    id: 'experience_campfire',
+    name: 'Experience: Campfire Nights',
+    description: 'Image for the Campfire Nights experience.',
+    url: ''
+  },
+  {
+    id: 'exp_games',
+    name: 'Experience: Indoor Games',
+    description: 'Image for the Indoor Games experience.',
+    url: ''
+  },
+  {
+    id: 'exp_couple',
+    name: 'Experience: Couple Package',
+    description: 'Image for the Couple Package experience.',
+    url: ''
+  },
+  {
+    id: 'exp_family',
+    name: 'Experience: Family',
+    description: 'Image for the Family experience.',
+    url: ''
+  }
+];
+
 // Helper to access window localStorage safely with SSR
 const isClient = () => typeof window !== 'undefined';
 
@@ -340,5 +453,51 @@ export const adminData = {
       list[index].drive = drive;
       adminData.saveAttractions(list);
     }
+  },
+
+  // Images
+  getImages: (): ImageItem[] => getStoredData('sitharom_images', initialImages),
+  saveImages: (data: ImageItem[]) => setStoredData('sitharom_images', data),
+  addImage: (img: Omit<ImageItem, 'id' | 'uploadDate'>) => {
+    const list = adminData.getImages();
+    const newImg: ImageItem = {
+      ...img,
+      id: 'img_' + Date.now(),
+      uploadDate: new Date().toISOString()
+    };
+    list.unshift(newImg);
+    adminData.saveImages(list);
+    return newImg;
+  },
+  deleteImage: (id: string) => {
+    const list = adminData.getImages();
+    const filtered = list.filter(i => i.id !== id);
+    adminData.saveImages(filtered);
+  },
+  updateImageMetadata: (id: string, category: string, usage: string) => {
+    const list = adminData.getImages();
+    const index = list.findIndex(i => i.id === id);
+    if (index !== -1) {
+      list[index].category = category;
+      list[index].usage = usage;
+      adminData.saveImages(list);
+    }
+  },
+
+  // Site Image Slots
+  getSiteImageSlots: (): SiteImageSlot[] => getStoredData('sitharom_site_images_v2', initialSiteImageSlots),
+  saveSiteImageSlots: (data: SiteImageSlot[]) => setStoredData('sitharom_site_images_v2', data),
+  updateSiteImageSlot: (id: string, newUrl: string) => {
+    const list = adminData.getSiteImageSlots();
+    const index = list.findIndex(s => s.id === id);
+    if (index !== -1) {
+      list[index].url = newUrl;
+      adminData.saveSiteImageSlots(list);
+    }
+  },
+  getSiteImageUrl: (id: string, fallbackUrl: string): string => {
+    const list = adminData.getSiteImageSlots();
+    const slot = list.find(s => s.id === id);
+    return slot?.url || fallbackUrl;
   }
 };
