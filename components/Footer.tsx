@@ -41,7 +41,7 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <h4 className="font-display text-lg tracking-widest uppercase text-warm-white">Accommodations</h4>
             <nav className="flex flex-col gap-3 text-base text-text-muted font-light">
-              <Link href="/villas#ithal" className="hover:text-gold transition-colors inline-block">Ithal Villa (Private Pool)</Link>
+              <Link href="/villas#ithal" className="hover:text-gold transition-colors inline-block">Ithal Villa (Full Property)</Link>
               <Link href="/villas#harsham" className="hover:text-gold transition-colors inline-block">Harsham Villa</Link>
             </nav>
           </div>

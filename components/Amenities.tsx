@@ -9,7 +9,8 @@ import {
   Wifi, 
   Refrigerator, 
   Utensils,
-  Waves
+  Waves,
+  Gamepad2
 } from 'lucide-react';
 
 const amenitiesList = [
@@ -20,6 +21,7 @@ const amenitiesList = [
   { icon: Refrigerator, name: 'Mini Refrigerator', desc: 'Keep your beverages and snacks perfectly chilled.' },
   { icon: Utensils, name: 'Kitchen', desc: 'kitchen setup for your culinary needs.' },
   { icon: Waves, name: 'Infinity Pool', desc: 'Relax and rejuvenate in our private pristine infinity pool.' },
+  { icon: Gamepad2, name: 'Kids Play Area', desc: 'A dedicated fun-filled safe zone for children to play and enjoy.' },
 ];
 
 export default function Amenities() {

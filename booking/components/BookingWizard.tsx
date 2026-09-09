@@ -3,15 +3,15 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Calendar, 
-  Users, 
-  ChevronRight, 
+import {
+  Calendar,
+  Users,
+  ChevronRight,
   ChevronDown,
-  Check, 
-  Loader2, 
-  Sparkles, 
-  ArrowLeft, 
+  Check,
+  Loader2,
+  Sparkles,
+  ArrowLeft,
   Info,
   Gift,
   Tag,
@@ -20,6 +20,8 @@ import {
 } from 'lucide-react';
 import { RoomAvailability, ReservationResult } from '../types';
 import { useBooking } from '@/lib/BookingContext';
+import room1ImgStatic from '@/app/gallery/room1.jpeg';
+import room2ImgStatic from '@/app/gallery/room2.jpeg';
 
 type BookingFormData = {
   startDate: string;
@@ -38,7 +40,7 @@ export default function BookingWizard() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   // API State
   const [availableRooms, setAvailableRooms] = useState<RoomAvailability[]>([]);
   const [selectedRoom, setSelectedRoom] = useState<RoomAvailability | null>(null);
@@ -70,14 +72,14 @@ export default function BookingWizard() {
     try {
       // MOCK ROOMS instead of backend fetch for WhatsApp flow
       await new Promise(r => setTimeout(r, 800)); // simulate loading
-      
+
       const rooms: RoomAvailability[] = [
         {
-          roomId: 'villa-ilhal',
-          roomName: 'Ilhal Villa (Private Pool)',
+          roomId: 'villa-ithal',
+          roomName: 'Ithal Villa (Full Property)',
           description: 'Luxury private pool villa with serene forest views and premium amenities.',
           basePrice: 15000,
-          images: ['/images/wayanad-mist-hills.jpg'],
+          images: [room1ImgStatic.src],
           amenities: ['Private Pool', 'Free WiFi', 'Air Conditioning'],
           availableCount: 1,
           taxAmount: 0,
@@ -85,11 +87,11 @@ export default function BookingWizard() {
           maxOccupancy: 2
         },
         {
-          roomId: 'villa-sitharom',
-          roomName: 'Sitharom Suite',
-          description: 'Premium luxury suite offering panoramic valley views and exclusive access.',
+          roomId: 'villa-harsham',
+          roomName: 'Harsham Villa',
+          description: 'Premium luxury villa offering panoramic valley views and exclusive access.',
           basePrice: 12000,
-          images: ['/images/tropical_shadows_bg.png'],
+          images: [room2ImgStatic.src],
           amenities: ['Balcony View', 'Free WiFi', 'Breakfast Included'],
           availableCount: 1,
           taxAmount: 0,
@@ -99,10 +101,10 @@ export default function BookingWizard() {
       ];
 
       setAvailableRooms(rooms);
-      
+
       // Auto-select room if context specifies selectedRoomType
       if (selectedRoomType) {
-        const matchingRoom = rooms.find(r => 
+        const matchingRoom = rooms.find(r =>
           r.roomName.toLowerCase().includes(selectedRoomType.toLowerCase())
         );
         if (matchingRoom) {
@@ -196,7 +198,7 @@ Please confirm availability.
 Thank you.`;
 
       const encodedMsg = encodeURIComponent(msg);
-      
+
       setReservationResult({
         reservationId: 'WA-' + Date.now(),
         status: 'PENDING',
@@ -207,13 +209,13 @@ Thank you.`;
         totalPrice: grandTotal,
         currency: 'INR'
       });
-      
+
       setStep(4);
-      
+
       // Attempt to open WhatsApp
       const wpUrl = `https://wa.me/917306197613?text=${encodedMsg}`;
       const newWin = window.open(wpUrl, '_blank');
-      
+
       if (!newWin) {
         setError('Unable to open WhatsApp automatically. Please click the button below to contact us.');
       }
@@ -306,22 +308,20 @@ Thank you.`;
         <h2 className="text-2xl md:text-3xl font-display font-light mb-6 tracking-wide">
           {step === 4 ? 'Reservation Secured' : 'Secure Reservation Engine'}
         </h2>
-        
+
         {step < 4 && (
           <div className="flex justify-center items-center gap-1.5 max-w-sm mx-auto">
             {[1, 2, 3].map((s) => (
               <div key={s} className="flex items-center">
-                <div 
-                  className={`w-6 h-6 rounded-full border flex items-center justify-center text-[9px] font-medium transition-all duration-500 ${
-                    step >= s ? 'border-gold text-gold bg-gold/10' : 'border-warm-white/10 text-warm-white/30'
-                  } ${step === s ? 'ring-2 ring-gold/30 scale-110 font-bold' : ''}`}
+                <div
+                  className={`w-6 h-6 rounded-full border flex items-center justify-center text-[9px] font-medium transition-all duration-500 ${step >= s ? 'border-gold text-gold bg-gold/10' : 'border-warm-white/10 text-warm-white/30'
+                    } ${step === s ? 'ring-2 ring-gold/30 scale-110 font-bold' : ''}`}
                 >
                   {step > s ? <Check size={11} className="text-gold" /> : s}
                 </div>
                 {s < 3 && (
-                  <div className={`h-[1px] w-8 md:w-12 transition-colors duration-500 ${
-                    step > s ? 'bg-gold/60' : 'bg-warm-white/10'
-                  }`} />
+                  <div className={`h-[1px] w-8 md:w-12 transition-colors duration-500 ${step > s ? 'bg-gold/60' : 'bg-warm-white/10'
+                    }`} />
                 )}
               </div>
             ))}
@@ -330,8 +330,8 @@ Thank you.`;
       </div>
 
       {error && (
-        <motion.div 
-          initial={{ opacity: 0, y: -10 }} 
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-xl mx-auto mb-6 bg-red-950/20 border border-red-500/20 p-4 text-xs text-red-300 flex items-center gap-3 backdrop-blur-md"
         >
@@ -342,10 +342,10 @@ Thank you.`;
 
       <div className="relative z-10">
         <AnimatePresence mode="wait">
-          
+
           {/* STEP 1: DATES, GUESTS & PROMO */}
           {step === 1 && (
-            <motion.form 
+            <motion.form
               key="step1"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -355,7 +355,8 @@ Thank you.`;
               className="max-w-3xl mx-auto w-full flex flex-col gap-6"
             >
               {/* CSS hack to completely hide native Chrome calendar icons */}
-              <style dangerouslySetInnerHTML={{ __html: `
+              <style dangerouslySetInnerHTML={{
+                __html: `
                 input[type="date"]::-webkit-calendar-picker-indicator {
                   opacity: 0 !important;
                   position: absolute !important;
@@ -370,7 +371,7 @@ Thank you.`;
               ` }} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-villa-dark/60 border border-gold/15 p-6 backdrop-blur-md shadow-xl rounded-xl">
-                
+
                 {/* Check-In Date */}
                 <div className="flex flex-col gap-2 p-4 border border-warm-white/5 bg-warm-white/[0.01] hover:bg-warm-white/[0.03] transition-colors relative group rounded-lg">
                   <label className="text-[9px] tracking-[0.2em] uppercase text-gold font-medium block">
@@ -378,7 +379,7 @@ Thank you.`;
                   </label>
                   <div className="flex items-center gap-3 relative">
                     <Calendar className="text-gold w-4 h-4 shrink-0 group-hover:scale-105 transition-transform duration-300" />
-                    <input 
+                    <input
                       type="date"
                       {...register('startDate', { required: true })}
                       style={{ colorScheme: 'dark', backgroundColor: 'transparent', color: '#FFFDF9' }}
@@ -394,7 +395,7 @@ Thank you.`;
                   </label>
                   <div className="flex items-center gap-3 relative">
                     <Calendar className="text-gold w-4 h-4 shrink-0 group-hover:scale-105 transition-transform duration-300" />
-                    <input 
+                    <input
                       type="date"
                       {...register('endDate', { required: true })}
                       style={{ colorScheme: 'dark', backgroundColor: 'transparent', color: '#FFFDF9' }}
@@ -403,81 +404,18 @@ Thank you.`;
                   </div>
                 </div>
 
-                {/* Guests Selector */}
-                <div className="flex flex-col gap-2 p-4 border border-warm-white/5 bg-warm-white/[0.01] hover:bg-warm-white/[0.03] transition-colors relative group rounded-lg">
-                  <label className="text-[9px] tracking-[0.2em] uppercase text-gold font-medium block">
-                    Guests (Adults)
-                  </label>
-                  <div className="flex items-center gap-3 relative">
-                    <Users className="text-gold w-4 h-4 shrink-0 group-hover:scale-105 transition-transform duration-300" />
-                    <div className="w-full relative flex items-center">
-                      <select 
-                        {...register('adults')}
-                        style={{ colorScheme: 'dark', backgroundColor: 'transparent', color: '#FFFDF9' }}
-                        className="w-full bg-transparent text-sm font-medium focus:outline-none cursor-pointer appearance-none pr-8 py-1"
-                      >
-                        <option value="1" className="bg-villa-dark text-warm-white">1 Guest</option>
-                        <option value="2" className="bg-villa-dark text-warm-white">2 Guests</option>
-                        <option value="3" className="bg-villa-dark text-warm-white">3 Guests</option>
-                        <option value="4" className="bg-villa-dark text-warm-white">4+ Guests</option>
-                      </select>
-                      <div className="absolute right-0 pointer-events-none text-gold/80">
-                        <ChevronDown className="w-3.5 h-3.5" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Promo Code Input */}
-                <div className="flex flex-col gap-2 p-4 border border-warm-white/5 bg-warm-white/[0.01] hover:bg-warm-white/[0.03] transition-colors relative group rounded-lg">
-                  <label className="text-[9px] tracking-[0.2em] uppercase text-gold font-medium block">
-                    Promotional Code
-                  </label>
-                  <div className="flex items-center gap-3 relative">
-                    <Gift className="text-gold w-4 h-4 shrink-0" />
-                    <input 
-                      type="text"
-                      placeholder="e.g. WELCOME10"
-                      value={promoCode}
-                      onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
-                      className="w-full bg-transparent text-sm font-medium focus:outline-none placeholder:text-warm-white/30 text-warm-white uppercase py-1"
-                    />
-                    <button
-                      type="button"
-                      onClick={handleApplyPromo}
-                      className="text-[10px] tracking-wider text-gold hover:text-white font-semibold uppercase shrink-0 transition-colors"
-                    >
-                      Apply
-                    </button>
-                  </div>
-                </div>
-
               </div>
-
-              {/* Promo validation response feedback */}
-              {appliedPromo && (
-                <div className="max-w-xl mx-auto flex items-center gap-2 text-xs text-green-400 bg-green-950/20 border border-green-500/20 px-4 py-2 rounded">
-                  <CheckCircle2 size={14} />
-                  <span>Promo code <strong>{appliedPromo}</strong> applied successfully! ({promoDiscount * 100}% Discount)</span>
-                </div>
-              )}
-              {promoError && (
-                <div className="max-w-xl mx-auto flex items-center gap-2 text-xs text-red-400 bg-red-950/20 border border-red-500/20 px-4 py-2 rounded">
-                  <Info size={14} />
-                  <span>{promoError} (Try <strong>WELCOME10</strong> or <strong>SITHAROM</strong>)</span>
-                </div>
-              )}
 
               {/* Submit Button with Shimmer & Glow */}
               <div className="mt-4 max-w-sm mx-auto w-full">
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={loading}
                   className="w-full relative overflow-hidden bg-gold hover:bg-[#D4B780] active:scale-[0.98] text-villa-dark font-medium tracking-[0.25em] uppercase text-xs transition-all duration-300 flex items-center justify-center gap-2 py-4 shadow-[0_4px_20px_rgba(201,169,110,0.25)] rounded-full hover:shadow-[0_4px_30px_rgba(201,169,110,0.4)] group"
                 >
                   {/* Subtle Shimmer Sweeping Overlay */}
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
-                  
+
                   {loading ? (
                     <Loader2 className="animate-spin" size={16} />
                   ) : (
@@ -497,7 +435,7 @@ Thank you.`;
 
           {/* STEP 2: ROOM SELECTION */}
           {step === 2 && (
-            <motion.div 
+            <motion.div
               key="step2"
               initial={{ opacity: 0, x: 15 }}
               animate={{ opacity: 1, x: 0 }}
@@ -517,7 +455,7 @@ Thank you.`;
               {availableRooms.length === 0 ? (
                 <div className="text-center py-12 border border-warm-white/10 rounded-xl bg-warm-white/[0.02]">
                   <p className="text-sm text-warm-white/60 mb-4 font-light">No rooms available for the selected dates.</p>
-                  <button 
+                  <button
                     onClick={() => setStep(1)}
                     className="border border-gold/40 text-gold hover:bg-gold hover:text-villa-dark px-6 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all"
                   >
@@ -529,11 +467,10 @@ Thank you.`;
                   {availableRooms.map((room) => {
                     const isPreselected = selectedRoomType && room.roomName.toLowerCase().includes(selectedRoomType.toLowerCase());
                     return (
-                      <div 
-                        key={room.roomId} 
-                        className={`bg-villa-dark/40 border rounded-xl overflow-hidden flex flex-col group transition-all duration-300 relative ${
-                          isPreselected ? 'border-gold shadow-[0_0_15px_rgba(201,169,110,0.15)]' : 'border-warm-white/10 hover:border-gold/30'
-                        }`}
+                      <div
+                        key={room.roomId}
+                        className={`bg-villa-dark/40 border rounded-xl overflow-hidden flex flex-col group transition-all duration-300 relative ${isPreselected ? 'border-gold shadow-[0_0_15px_rgba(201,169,110,0.15)]' : 'border-warm-white/10 hover:border-gold/30'
+                          }`}
                       >
                         {isPreselected && (
                           <div className="absolute top-4 right-4 bg-gold text-villa-dark text-[8px] font-bold tracking-widest uppercase px-2 py-1 z-10 rounded">
@@ -541,9 +478,9 @@ Thank you.`;
                           </div>
                         )}
                         <div className="relative h-48 overflow-hidden">
-                          <img 
-                            src={room.images[0] || 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80'} 
-                            alt={room.roomName} 
+                          <img
+                            src={room.images[0] || 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80'}
+                            alt={room.roomName}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                           />
                           <div className="absolute bottom-3 left-3 bg-villa-dark/80 backdrop-blur-sm text-gold text-[9px] tracking-widest uppercase px-2.5 py-1 rounded border border-gold/10">
@@ -555,7 +492,7 @@ Thank you.`;
                           <div>
                             <h3 className="text-lg font-display tracking-wide mb-1 text-warm-white">{room.roomName}</h3>
                             <p className="text-[11px] text-warm-white/60 font-light mb-4 line-clamp-2 leading-relaxed">{room.description}</p>
-                            
+
                             <div className="flex flex-wrap gap-1.5 mb-4">
                               {room.amenities.slice(0, 3).map((amenity, idx) => (
                                 <span key={idx} className="text-[9px] bg-warm-white/5 border border-warm-white/10 text-warm-white/80 px-2 py-0.5 rounded">
@@ -565,7 +502,7 @@ Thank you.`;
                             </div>
                           </div>
 
-                          <button 
+                          <button
                             onClick={() => handleSelectRoom(room)}
                             className="w-full bg-gold hover:bg-[#D4B780] text-villa-dark text-[10px] font-semibold tracking-widest uppercase py-3 transition-colors flex items-center justify-center gap-1.5 rounded-lg"
                           >
@@ -583,7 +520,7 @@ Thank you.`;
 
           {/* STEP 3: GUEST DETAILS & PRICE REVIEW */}
           {step === 3 && selectedRoom && (
-            <motion.form 
+            <motion.form
               key="step4"
               initial={{ opacity: 0, x: 15 }}
               animate={{ opacity: 1, x: 0 }}
@@ -594,11 +531,11 @@ Thank you.`;
               {/* Form Side */}
               <div className="lg:col-span-3 flex flex-col gap-5 text-left bg-villa-dark/40 border border-warm-white/10 p-6 rounded-xl">
                 <h3 className="text-lg font-display text-gold border-b border-warm-white/10 pb-2">Guest Details</h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">First Name</label>
-                    <input 
+                    <input
                       type="text"
                       placeholder="John"
                       {...register('firstName', { required: true })}
@@ -609,7 +546,7 @@ Thank you.`;
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Last Name</label>
-                    <input 
+                    <input
                       type="text"
                       placeholder="Doe"
                       {...register('lastName', { required: true })}
@@ -623,7 +560,7 @@ Thank you.`;
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Email Address</label>
-                    <input 
+                    <input
                       type="email"
                       placeholder="john.doe@gmail.com"
                       {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
@@ -634,7 +571,7 @@ Thank you.`;
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Phone / WhatsApp</label>
-                    <input 
+                    <input
                       type="tel"
                       placeholder="+91 98765 43210"
                       {...register('phone', { required: true, pattern: /^(?:\+91|91)?[6789]\d{9}$/ })}
@@ -647,7 +584,7 @@ Thank you.`;
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Special Requests (Optional)</label>
-                  <textarea 
+                  <textarea
                     rows={3}
                     placeholder="Dietary preferences, plantation tour requests, etc."
                     {...register('specialRequests')}
@@ -667,7 +604,7 @@ Thank you.`;
               <div className="lg:col-span-2 bg-villa-dark border border-gold/15 p-5 flex flex-col justify-between gap-6 rounded-xl shadow-xl text-left">
                 <div>
                   <h4 className="font-display text-base text-gold border-b border-warm-white/10 pb-2 mb-3 tracking-wide">Stay Summary</h4>
-                  
+
                   <div className="flex flex-col gap-3 text-sm leading-relaxed">
                     <div className="flex justify-between">
                       <span className="opacity-60">Villa Type:</span>
@@ -706,7 +643,7 @@ Thank you.`;
                       <span className="opacity-60">GST (18%):</span>
                       <span className="text-warm-white">₹{getTaxAmount().toLocaleString()}</span>
                     </div>
-                    
+
                     {selectedAddons.length > 0 && (
                       <div className="flex flex-col gap-1 border-t border-warm-white/5 pt-2.5">
                         <span className="opacity-60 block mb-0.5">Exclusive Customizations:</span>
@@ -733,7 +670,7 @@ Thank you.`;
                     <span className="text-2xl font-display font-semibold text-gold">₹{getTotalPrice().toLocaleString()}</span>
                   </div>
 
-                  <button 
+                  <button
                     type="submit"
                     disabled={loading}
                     className="w-full relative overflow-hidden bg-gold hover:bg-[#D4B780] active:scale-[0.98] text-villa-dark py-3.5 text-[10px] font-bold tracking-widest uppercase transition-all rounded-full flex items-center justify-center gap-1.5 shadow-[0_4px_15px_rgba(201,169,110,0.2)] hover:shadow-[0_4px_25px_rgba(201,169,110,0.3)] group"
@@ -748,7 +685,7 @@ Thank you.`;
                       </>
                     )}
                   </button>
-                  
+
                   <p className="text-[9px] opacity-40 text-center flex items-center justify-center gap-1 mt-1 font-light">
                     <Info size={9} /> Direct rates encrypted and backed by secure room allotments.
                   </p>
@@ -759,7 +696,7 @@ Thank you.`;
 
           {/* STEP 4: SUCCESSFlow (WhatsApp Redirect) */}
           {step === 4 && reservationResult && (
-            <motion.div 
+            <motion.div
               key="step5"
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -769,10 +706,10 @@ Thank you.`;
               <div className="w-14 h-14 rounded-full bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] mb-1">
                 <CheckCircle2 size={26} />
               </div>
-              
+
               <span className="text-[10px] tracking-[0.25em] uppercase text-[#25D366] font-semibold">Redirecting to WhatsApp</span>
               <h3 className="text-2xl font-display font-light text-warm-white">Complete Your Enquiry</h3>
-              
+
               <p className="text-xs opacity-75 font-light leading-relaxed">
                 Your reservation details are ready. {error ? error : "We are opening WhatsApp for you to finalize the booking with our team."}
               </p>
@@ -793,7 +730,7 @@ Thank you.`;
               </div>
 
               {error && (
-                <a 
+                <a
                   href={`https://wa.me/917306197613`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -803,7 +740,7 @@ Thank you.`;
                 </a>
               )}
 
-              <button 
+              <button
                 onClick={() => {
                   setStep(1);
                   setSelectedRoom(null);

@@ -9,7 +9,8 @@ type FormData = {
   phone: string;
   checkIn: string;
   checkOut: string;
-  guests: string;
+  adults: string;
+  children: string;
   villaType: string;
   message: string;
 };
@@ -38,7 +39,7 @@ export default function BookingForm() {
       `👤 *Name:* ${data.name}\n` +
       `📞 *Phone / WhatsApp:* ${data.phone}\n` +
       `📅 *Check-in / Check-out:* ${formatDate(data.checkIn)} to ${formatDate(data.checkOut)}\n` +
-      `👥 *Guests:* ${data.guests}\n` +
+      `👥 *Guests:* ${data.adults} Adults, ${data.children || '0'} Children\n` +
       `🏡 *Room Type:* ${data.villaType}\n\n` +
       `💬 *Message:* \n${data.message || 'No additional message.'}`;
     
@@ -172,17 +173,32 @@ export default function BookingForm() {
             </div>
 
             <div className="flex flex-col md:flex-row gap-6">
-              <div className="flex-1 flex flex-col gap-1">
-                <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1">Guests</label>
-                <div className="relative">
-                  <input 
-                    type="number"
-                    min="1"
-                    max="17"
-                    defaultValue="2"
-                    {...register('guests')}
-                    className="w-full bg-warm-white/5 dark:bg-black/20 border border-warm-white/10 dark:border-gold/15 hover:border-gold/40 focus:border-gold text-warm-white dark:text-sand px-4 py-3 rounded-xl focus:outline-none transition-all duration-300 text-sm"
-                  />
+              <div className="flex-1 flex gap-4">
+                <div className="flex-1 flex flex-col gap-1">
+                  <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1 truncate">Adult (12+)</label>
+                  <div className="relative">
+                    <input 
+                      type="number"
+                      min="1"
+                      max="17"
+                      defaultValue="2"
+                      {...register('adults')}
+                      className="w-full bg-warm-white/5 dark:bg-black/20 border border-warm-white/10 dark:border-gold/15 hover:border-gold/40 focus:border-gold text-warm-white dark:text-sand px-4 py-3 rounded-xl focus:outline-none transition-all duration-300 text-sm"
+                    />
+                  </div>
+                </div>
+                <div className="flex-1 flex flex-col gap-1">
+                  <label className="text-sm font-medium tracking-widest uppercase opacity-90 px-1 truncate">Child (6-12)</label>
+                  <div className="relative">
+                    <input 
+                      type="number"
+                      min="0"
+                      max="17"
+                      defaultValue="0"
+                      {...register('children')}
+                      className="w-full bg-warm-white/5 dark:bg-black/20 border border-warm-white/10 dark:border-gold/15 hover:border-gold/40 focus:border-gold text-warm-white dark:text-sand px-4 py-3 rounded-xl focus:outline-none transition-all duration-300 text-sm"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="flex-1 flex flex-col gap-1">

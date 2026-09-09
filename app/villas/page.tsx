@@ -1,4 +1,5 @@
 import Villas from '@/components/Villas';
+import VillaDetailSection from '@/components/VillaDetailSection';
 import Amenities from '@/components/Amenities';
 
 export const metadata = {
@@ -21,7 +22,7 @@ export default function VillasPage() {
         </p>
       </div>
 
-      <Villas />
+      <VillaDetailSection />
       <Amenities />
     </main>
   );

@@ -32,30 +32,6 @@ const packages = [
     ],
     price: "₹16,999 / night",
     message: "✨ Hello Sitharom Resort! I'm interested in booking the Family Retreat package. Please provide availability and details."
-  },
-  {
-    name: "Wellness Weekend",
-    image: img5,
-    bullets: [
-      "Yoga session at misty sunrise",
-      "Personalized Ayurvedic consults",
-      "Guided forest meditation walks",
-      "Custom organic detox meals"
-    ],
-    price: "₹13,999 / night",
-    message: "✨ Hello Sitharom Resort! I'm interested in booking the Wellness Weekend package. Please provide availability and details."
-  },
-  {
-    name: "Corporate Offsite",
-    image: img9,
-    bullets: [
-      "Full resort exclusivity (both villas)",
-      "Private meeting / gathering deck",
-      "Guided estate team treks",
-      "Custom caterings & host supports"
-    ],
-    price: "Custom Pricing",
-    message: "✨ Hello Sitharom Resort! I'm interested in booking a Corporate Offsite event. Please provide pricing and details."
   }
 ];
 

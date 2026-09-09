@@ -93,8 +93,7 @@ export default function Villas() {
                   </div>
                 </div>
                 
-                {/* Hidden content that slides up */}
-                <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden mt-4">
+                <div className="mt-4">
                   <Link 
                     href={`/villas#${villa.id}`}
                     className="block w-full bg-villa-dark dark:bg-gold text-warm-white dark:text-villa-dark text-center py-3 text-xs tracking-widest uppercase hover:bg-clay dark:hover:bg-gold/80 transition-colors duration-500"
