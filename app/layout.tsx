@@ -82,8 +82,7 @@ export default function RootLayout({
               },
               "amenityFeature": [
                 { "@type": "LocationFeatureSpecification", "name": "Private Pool", "value": true },
-                { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
-                { "@type": "LocationFeatureSpecification", "name": "Air Conditioning", "value": true }
+                { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true }
               ]
             })
           }}

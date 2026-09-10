@@ -9,16 +9,40 @@ import { useBooking } from '@/lib/BookingContext';
 
 const villas = [
   {
+    id: 'full-property',
+    name: 'Sitharom Full Property',
+    tagline: 'Exclusive access to both Ithal and Harsham villas for large groups',
+    price: '₹27,999',
+    priceNote: 'per night · 4 Bedrooms',
+    image: room1Img,
+    imageAlt: 'Sitharom Full Property — Private Pool Villas in Wayanad',
+    features: [
+      { icon: Waves, label: '2 Infinity Pools' },
+      { icon: BedDouble, label: '4 Bedrooms' },
+      { icon: Wind, label: '8 Private Balconies' },
+      { icon: Coffee, label: '2 Kitchens' },
+      { icon: Utensils, label: 'Food Dining Facilities' },
+      { icon: Wifi, label: 'High-Speed Wi-Fi' },
+      { icon: Tv, label: 'Smart TVs' },
+      { icon: Droplets, label: 'Outdoor Showers' },
+      { icon: Flame, label: 'Private Campfire Areas' },
+      { icon: Refrigerator, label: 'Mini Refrigerators' },
+      { icon: TreePine, label: 'Forest & Plantation Access' },
+      { icon: CarFront, label: 'Secure Parking' },
+    ],
+    waMsg: '✨ Hello Sitharom! I\'d like to book the Full Property (Both Villas). Please share availability and pricing.',
+  },
+  {
     id: 'ithal',
     name: 'Ithal Villa',
     tagline: 'Nestled in the forest canopy with panoramic valley views',
     price: '₹12,999',
-    priceNote: 'per night · 4 Bedrooms',
+    priceNote: 'per night · 2 Bedrooms',
     image: room1Img,
     imageAlt: 'Ithal Villa — Private Pool Villa in Wayanad',
     features: [
       { icon: Waves, label: 'Infinity Pool' },
-      { icon: BedDouble, label: '4 Bedrooms' },
+      { icon: BedDouble, label: '2 Bedrooms' },
       { icon: Wind, label: '4 Private Balconies' },
       { icon: Coffee, label: 'Kitchen' },
       { icon: Utensils, label: 'Food Dining Facilities' },
@@ -37,12 +61,12 @@ const villas = [
     name: 'Harsham Villa',
     tagline: 'A breezy highland retreat with open-sky pool and plantation views',
     price: '₹14,999',
-    priceNote: 'per night · 4 Bedrooms',
+    priceNote: 'per night · 2 Bedrooms',
     image: room2Img,
     imageAlt: 'Harsham Villa — Luxury Pool Villa in Vythiri',
     features: [
       { icon: Waves, label: 'Infinity Pool' },
-      { icon: BedDouble, label: '4 Bedrooms' },
+      { icon: BedDouble, label: '2 Bedrooms' },
       { icon: Wind, label: '4 Private Balconies' },
       { icon: Coffee, label: 'Kitchen' },
       { icon: Utensils, label: 'Food Dining Facilities' },
@@ -129,9 +153,9 @@ export default function VillaDetailSection() {
                   {/* Spec pill */}
                   <div className="flex flex-wrap items-center gap-3 mb-8 mt-4">
                     {[
-                      { icon: BedDouble, label: '4 Bedrooms' },
-                      { icon: Users, label: 'Up to 17 Guests' },
-                      { icon: Waves, label: 'Infinity Pool' },
+                      { icon: BedDouble, label: villa.id === 'full-property' ? '4 Bedrooms' : '2 Bedrooms' },
+                      { icon: Users, label: villa.id === 'full-property' ? 'Up to 16 Guests' : '8 Guests' },
+                      { icon: Waves, label: villa.id === 'full-property' ? '2 Infinity Pools' : 'Infinity Pool' },
                     ].map(({ icon: Icon, label }) => (
                       <span key={label} className="inline-flex items-center gap-1.5 border border-sand-dark px-3 py-1.5 text-xs tracking-wider text-text-mid font-light rounded-full">
                         <Icon size={13} className="text-clay" strokeWidth={1.8} />

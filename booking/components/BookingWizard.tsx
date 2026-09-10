@@ -75,12 +75,24 @@ export default function BookingWizard() {
 
       const rooms: RoomAvailability[] = [
         {
+          roomId: 'villa-full-property',
+          roomName: 'Full Property (Both Villas)',
+          description: 'Exclusive access to both Ithal and Harsham villas for large groups.',
+          basePrice: 27000,
+          images: [room1ImgStatic.src],
+          amenities: ['2 Private Pools', 'Free WiFi', 'Campfire Area'],
+          availableCount: 1,
+          taxAmount: 0,
+          currency: 'INR',
+          maxOccupancy: 4
+        },
+        {
           roomId: 'villa-ithal',
-          roomName: 'Ithal Villa (Full Property)',
+          roomName: 'Ithal Villa',
           description: 'Luxury private pool villa with serene forest views and premium amenities.',
           basePrice: 15000,
           images: [room1ImgStatic.src],
-          amenities: ['Private Pool', 'Free WiFi', 'Air Conditioning'],
+          amenities: ['Private Pool', 'Free WiFi'],
           availableCount: 1,
           taxAmount: 0,
           currency: 'INR',
@@ -579,6 +591,31 @@ Thank you.`;
                       className={`border focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20 ${errors.phone ? 'border-red-500/50 focus:border-red-500' : 'border-warm-white/15 focus:border-gold'}`}
                     />
                     {errors.phone && <span className="text-[10px] text-red-400">Valid Indian mobile required</span>}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Number of Adults</label>
+                    <input
+                      type="number"
+                      min="1"
+                      {...register('adults', { required: true, min: 1 })}
+                      style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
+                      className={`border focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20 ${errors.adults ? 'border-red-500/50 focus:border-red-500' : 'border-warm-white/15 focus:border-gold'}`}
+                    />
+                    {errors.adults && <span className="text-[10px] text-red-400">At least 1 adult required</span>}
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-sm font-medium tracking-wider uppercase text-warm-white/90">Number of Kids</label>
+                    <input
+                      type="number"
+                      min="0"
+                      {...register('children', { required: true, min: 0 })}
+                      style={{ backgroundColor: 'rgba(44, 31, 20, 0.4)', color: '#FFFDF9' }}
+                      className={`border focus:outline-none px-4 py-2.5 text-sm rounded transition-colors placeholder:text-warm-white/20 ${errors.children ? 'border-red-500/50 focus:border-red-500' : 'border-warm-white/15 focus:border-gold'}`}
+                    />
+                    {errors.children && <span className="text-[10px] text-red-400">Invalid number</span>}
                   </div>
                 </div>
 

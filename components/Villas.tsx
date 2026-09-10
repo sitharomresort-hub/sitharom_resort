@@ -10,10 +10,18 @@ import { adminData } from '@/lib/adminData';
 
 const villas = [
   {
+    id: 'full-property',
+    name: 'Full Property (Both Villas)',
+    price: 'Exclusive',
+    tag: '4 Bedrooms',
+    staticImage: room1ImgStatic,
+    imageKey: 'full_property_main'
+  },
+  {
     id: 'ithal',
     name: 'Ithal Villa',
     price: 'Premium',
-    tag: '4 Bedrooms',
+    tag: '2 Bedrooms',
     staticImage: room1ImgStatic,
     imageKey: 'ithal_main'
   },
@@ -21,7 +29,7 @@ const villas = [
     id: 'harsham',
     name: 'Harsham Villa',
     price: 'Premium',
-    tag: '4 Bedrooms',
+    tag: '2 Bedrooms',
     staticImage: room2ImgStatic,
     imageKey: 'harsham_main'
   }
