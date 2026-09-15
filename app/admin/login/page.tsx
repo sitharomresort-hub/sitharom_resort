@@ -186,12 +186,7 @@ export default function AdminLogin() {
               </motion.button>
             </div>
 
-            {/* Help Hint */}
-            <div className="text-center pt-2">
-              <p className="text-[10px] text-text-muted font-body font-light">
-                Demo access hint: <span className="text-gold font-normal">admin</span> / <span className="text-gold font-normal">sitharom2026</span>
-              </p>
-            </div>
+
 
           </form>
         </div>
