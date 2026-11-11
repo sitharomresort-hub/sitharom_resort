@@ -40,6 +40,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Favicon & Icons — explicit link tags for Google Search */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png" />
+        <link rel="icon" href="/icon.png" sizes="512x512" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" sizes="180x180" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#B5451B" />
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{

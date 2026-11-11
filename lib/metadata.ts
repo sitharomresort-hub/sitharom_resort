@@ -33,6 +33,7 @@ export const siteMetadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
       { url: '/icon.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
@@ -40,6 +41,7 @@ export const siteMetadata: Metadata = {
     ],
     shortcut: '/favicon.ico',
   },
+  manifest: '/site.webmanifest',
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
   },
