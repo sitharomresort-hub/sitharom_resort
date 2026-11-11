@@ -7,6 +7,7 @@ const defaultMetadata = {
 }
 
 export const siteMetadata: Metadata = {
+  metadataBase: new URL('https://www.sitharompoolvilla.com'),
   title: defaultMetadata.title,
   description: defaultMetadata.description,
   keywords: defaultMetadata.keywords,
@@ -14,19 +15,32 @@ export const siteMetadata: Metadata = {
     title: defaultMetadata.title,
     description: defaultMetadata.description,
     type: 'website',
-    images: ['https://sitharom.com/gallery/img9.jpeg'], // Using a real photo path of the property exterior
+    images: ['https://www.sitharompoolvilla.com/gallery/img9.jpeg'], // Using a real photo path of the property exterior
   },
   twitter: {
     card: 'summary_large_image',
     title: defaultMetadata.title,
     description: defaultMetadata.description,
-    images: ['https://sitharom.com/gallery/img9.jpeg'],
+    images: ['https://www.sitharompoolvilla.com/gallery/img9.jpeg'],
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: 'https://sitharom.com',
+    canonical: 'https://www.sitharompoolvilla.com',
+  },
+  icons: {
+    icon: [
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
   },
 }

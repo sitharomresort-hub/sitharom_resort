@@ -24,7 +24,13 @@ const inter = Inter({
   variable: '--font-inter'
 });
 
-export const metadata: Metadata = siteMetadata;
+export const metadata: Metadata = {
+  ...siteMetadata,
+  verification: {
+    ...siteMetadata.verification,
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || siteMetadata.verification?.google || "",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -59,7 +65,7 @@ export default function RootLayout({
               "@type": "LodgingBusiness",
               "name": "Sitharom Pool Villa Resort",
               "description": "Two exclusive private pool villas in the heart of Wayanad. Ithal Villa & Harsham Villa — each with 2 bedrooms and a private pool, nestled in the Western Ghats rainforest.",
-              "url": "https://poolvilla-resort.vercel.app",
+              "url": "https://www.sitharompoolvilla.com",
               "telephone": "+917306197613",
               "email": "sitharomresort@gmail.com",
               "address": {
